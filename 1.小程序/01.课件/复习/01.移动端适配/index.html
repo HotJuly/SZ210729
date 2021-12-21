@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta name="viewport" content="initial-scale=2,width=device-width" />  -->
+    <meta name="viewport" content="width=device-width" /> 
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        img{
+            /* width:187.5px; */
+            /* width:50%; */
+            /* 100vw=屏幕的百分百宽度 100vh=屏幕百分百高度 */
+            /* width:50vw; */
+            /* width:5rem; */
+            /* width:187.5rem; */
+            width:375px;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:100px">
+        <img src="/自拍.jpg" alt="">
+    </div>
+    <script>
+        /*  
+            移动端视口
+                移动端有几个视口?
+                    具有三个->
+                        1.布局视口
+                            页面上有多少东西都存放在布局视口上
+                                有多少东西都由它决定
+                                html标签就是布局视口
+
+                        2.视觉视口
+                            视觉视口用于显示可以看到的内容
+                            能看到多少东西都由它决定
+                                手机屏幕就是视觉视口(设备独立像素)
+                                iphone6下:375宽度*667高度
+
+                        3.理想视口(完美视口)
+                            理想视口不是一个真实存在的视口,他是一种特殊的状态
+                                如果布局视口宽度等于视觉视口宽度,称之为理想视口状态
+                                想要达到理想视口状态,只能去修改布局视口宽度,因为视觉视口大小不可变
+
+                    真实存在两个
+
+            面试题:如何知道布局视口宽度?
+                html标签就是布局视口
+                document.documentElement.clientWidt
+                布局视口默认宽度是980px
+
+            面试题:如何修改布局视口宽度?
+                通过meta[name=viewport]标签,可以控制布局视口宽度变化
+                    width=device-width(可以输入任意值)
+                    initial-scale=1(可以输入任意数字)
+                        initial-scale = 视觉视口宽度/布局视口宽度 = 0.5
+                    两者之间,谁计算出来的布局视口更大就以谁为准
+        */
+       /*
+        移动端适配
+            百分比适配
+                可以随着屏幕大小发生变化
+                缺点:但是width的百分比会参考于父级宽度,很容易受到影响
+
+            vw适配
+                可以随着屏幕大小发生变化
+                缺点:但是vw和vh属于C3新特性,所以兼容性不好
+
+            小结:需要一个全局共享的单位,这个单位的宽度会随着屏幕宽度发生变化
+
+            rem适配
+                rem->root em
+                大小参考于根节点字体大小
+                流程:
+                    1.先通过meta标签,将布局视口宽度变成和视觉视口宽度一样,在通过js获取到布局视口宽度
+                    2.根据当前视觉视口宽度除以特定系数,得到指定字体大小
+                    3.将计算结果作为根节点字体大小进行设置
+
+            viewport适配
+                设计稿宽度:750px
+                有个元素宽度:375px
+       
+       */
+        // console.log(document.documentElement.clientWidth)
+        // var width = document.documentElement.clientWidth;
+        // var fontSize = width/375;
+        // document.documentElement.style.fontSize=`${fontSize}px`
+
+
+        var uiWidth = 750;
+        var width = document.documentElement.clientWidth;
+        var scale = width/uiWidth;
+        document.querySelector('meta[name=viewport]').content=`initial-scale=${scale}`
+    </script>
+</body>
+</html>
