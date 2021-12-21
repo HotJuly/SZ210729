@@ -1,17 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button v-if="isShow" @click="handleClick">添加</button>
+    <input ref="input111" v-else type="text">
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return{
+      isShow:true
+    }
+  },
+  methods:{
+    handleClick(){
+      this.isShow=false;
+      console.log(this.isShow)
+
+      this.$nextTick(()=>{
+        this.$refs.input111.focus();
+      })
+
+      // debugger
+    }
   }
 }
 </script>
