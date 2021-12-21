@@ -1,19 +1,15 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
+/* pages/index/index.wxss */
+.indexContainer{
+  height:100%;
+  display:flex;
   flex-direction: column;
   align-items: center;
-  color: #aaa;
+  justify-content: space-around;
+  background-color: #f0f;
 }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+.indexContainer .avatarUrl{
+  width:200px;
+  height:200px;
   border-radius: 50%;
-}
-
-.usermotto {
-  margin-top: 200px;
 }

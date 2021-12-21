@@ -1,23 +1,15 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<!-- 
+    view->相当于html中的div标签,块元素
+    image->相当于html中的img标签,行内块元素
+    text->相当于html中的span标签,行内元素
+      他是弟中弟,最没有地位的
+      text标签居然认得回车
+    button->相当于html中的button,行内块元素
+ -->
+
+
+<view class="indexContainer">
+  <image class="avatarUrl" src="/static/images/dazuo.jpeg"></image>
+  <text class="username">你好,{{msg}}</text>
+  <button class="welcome">欢迎来到尚硅谷</button>
 </view>
