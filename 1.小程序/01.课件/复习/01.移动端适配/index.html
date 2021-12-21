@@ -77,6 +77,7 @@
                     1.先通过meta标签,将布局视口宽度变成和视觉视口宽度一样,在通过js获取到布局视口宽度
                     2.根据当前视觉视口宽度除以特定系数,得到指定字体大小
                     3.将计算结果作为根节点字体大小进行设置
+                注意:他是基于理想视口实现的适配方案
 
             viewport适配
                 设计稿宽度:750px
@@ -85,7 +86,7 @@
        */
         // console.log(document.documentElement.clientWidth)
         // var width = document.documentElement.clientWidth;
-        // var fontSize = width/375;
+        // var fontSize = width/10;
         // document.documentElement.style.fontSize=`${fontSize}px`
 
 
