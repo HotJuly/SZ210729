@@ -1,4 +1,5 @@
 // pages/index/index.js
+// 注册一个页面实例对象
 Page({
 
     /**

@@ -3,8 +3,9 @@
         "pages/index/index"
     ],
     "window": {
-      "navigationBarBackgroundColor": "#f00",
-      "navigationBarTextStyle": "white",
-      "navigationBarTitleText": "atguigu"
-    }
+        "navigationBarBackgroundColor": "#f00",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "atguigu"
+    },
+    "sitemapLocation": "sitemap.json"
 }
