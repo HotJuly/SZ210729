@@ -13,7 +13,21 @@ Page({
         3.他无法转换特殊类型数据,例如Map(转为普通对象),Set(转为普通数组)
     */
     data: {
-      msg:"我是初始化数据"
+      msg:"我是初始化数据",
+      userInfo:{}
+    },
+
+    // 获取用户个人信息-中期版本
+    getUserInfo(event){
+      // 框架给回调函数传递数据,一般两种渠道,一种this,一种实参
+      console.log('getUserInfo',event)
+      if(event.detail.rawData){
+        // 能进入这个判断,说明用户允许授权了
+        const userInfo = event.detail.userInfo;
+        this.setData({
+          userInfo
+        })
+      }
     },
 
     // 用于修改当前页面的msg数据
@@ -53,8 +67,17 @@ Page({
       // this.msg=123;
       // console.log(this.msg)
 
-      console.log('---------onLoad--------')
-      debugger
+      // console.log('---------onLoad--------')
+      // debugger
+
+      wx.getUserInfo({
+        success:(detail)=>{
+          // console.log('detail',detail)
+          this.setData({
+            userInfo:detail.userInfo
+          })
+        }
+      })
     },
 
     /**
