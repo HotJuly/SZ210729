@@ -16,6 +16,13 @@ Page({
       msg:"我是初始化数据"
     },
 
+    handleParent(){
+      console.log('handleParent')
+    },
+    handleClick(){
+      console.log('handleClick')
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
@@ -24,10 +31,10 @@ Page({
       // this.data.msg = "我是修改之后的数据"
       // console.log('msg',this.data.msg)
       // console.log(1)
-      this.setData({
-        msg:"我是修改之后的数据"
-      })
-      console.log('msg',this.data.msg)
+      // this.setData({
+      //   msg:"我是修改之后的数据"
+      // })
+      // console.log('msg',this.data.msg)
 
       // this.msg=123;
       // console.log(this.msg)
