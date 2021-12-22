@@ -52,12 +52,16 @@ Page({
 
       // this.msg=123;
       // console.log(this.msg)
+
+      console.log('---------onLoad--------')
+      debugger
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
+      console.log('---------onReady--------')
 
     },
 
@@ -65,6 +69,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+      console.log('---------onShow--------')
 
     },
 
@@ -72,6 +77,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
+      console.log('---------onHide--------')
 
     },
 
@@ -79,6 +85,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
+      console.log('---------onUnload--------')
 
     },
 
