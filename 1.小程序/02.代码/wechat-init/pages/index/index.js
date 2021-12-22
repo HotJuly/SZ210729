@@ -20,7 +20,13 @@ Page({
       console.log('handleParent')
     },
     handleClick(){
-      console.log('handleClick')
+      // console.log('handleClick')
+      // wx.navigateTo({
+      //   url: '/pages/log/log',
+      // })
+      wx.redirectTo({
+        url: '/pages/log/log',
+      })
     },
 
     /**
