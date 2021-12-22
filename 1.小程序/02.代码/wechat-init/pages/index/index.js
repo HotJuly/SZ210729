@@ -16,16 +16,24 @@ Page({
       msg:"我是初始化数据"
     },
 
+    // 用于修改当前页面的msg数据
+    changeMsg(){
+      this.setData({
+        msg:"我是修改之后的数据"
+      })
+    },
+
     handleParent(){
       console.log('handleParent')
     },
     handleClick(){
       // console.log('handleClick')
       // wx.navigateTo({
-      //   url: '/pages/log/log',
+      //   url: '../log/log',
       // })
       wx.redirectTo({
-        url: '/pages/log/log',
+        // url: '/pages/log/log',
+        url: '../log/log',
       })
     },
 
