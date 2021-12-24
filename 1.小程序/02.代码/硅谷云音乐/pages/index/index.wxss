@@ -1,0 +1,5 @@
+/**index.wxss**/
+.indexContainer .bannerSwiper .bannerItem .bannerImg{
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<view class="indexContainer">
+  <swiper 
+  class="bannerSwiper"
+  circular
+  indicator-dots
+  indicator-active-color="#d43c33"
+  >
+    <swiper-item class="bannerItem">
+      <image class="bannerImg" src="/static/images/dazuo.jpeg"></image>
+    </swiper-item>
+    <swiper-item class="bannerItem">
+      <image class="bannerImg" src="/static/images/dazuo.jpeg"></image>
+    </swiper-item>
+    <swiper-item class="bannerItem">
+      <image class="bannerImg" src="/static/images/dazuo.jpeg"></image>
+    </swiper-item>
+    <swiper-item class="bannerItem">
+      <image class="bannerImg" src="/static/images/dazuo.jpeg"></image>
+    </swiper-item>
+  </swiper>
+</view>
