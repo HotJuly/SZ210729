@@ -30,6 +30,25 @@ Page({
       }
     },
 
+    // 获取用户个人信息-最新版本
+    getUserProfile(){
+      // console.log('getUserProfile')
+      
+      wx.getUserProfile({
+        desc:"用于测试小程序用户授权功能",
+        success:(detail)=>{
+          // console.log('res',res)
+          const userInfo = detail.userInfo;
+          this.setData({
+            userInfo
+          })
+        },
+        fail:()=>{
+          console.log('fail')
+        }
+      })
+    },
+
     // 用于修改当前页面的msg数据
     changeMsg(){
       this.setData({
@@ -70,14 +89,29 @@ Page({
       // console.log('---------onLoad--------')
       // debugger
 
-      wx.getUserInfo({
+      // wx.getUserInfo({
+      //   success:(detail)=>{
+      //     // console.log('detail',detail)
+      //     this.setData({
+      //       userInfo:detail.userInfo
+      //     })
+      //   }
+      // })
+
+      wx.getUserProfile({
+        desc:"用于测试小程序用户授权功能",
         success:(detail)=>{
-          // console.log('detail',detail)
+          // console.log('res',res)
+          const userInfo = detail.userInfo;
           this.setData({
-            userInfo:detail.userInfo
+            userInfo
           })
+        },
+        fail:()=>{
+          console.log('fail')
         }
       })
+
     },
 
     /**
