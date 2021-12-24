@@ -4,7 +4,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    //首页轮播图数据
+    banners:[]
+
   },
 
   /**
@@ -27,18 +29,22 @@ Page({
               3.请求方式
     
     */
-  //  console.log('wx',wx)
-  console.log(1)
+    //  console.log('wx',wx)
+    // console.log(1)  
     wx.request({
       url:"http://localhost:3000/banner",
       data:{
         type:2
       },
       success:(res)=>{
+        // res就是响应报文,其中具有响应头和响应体
         console.log('res',res)
+        this.setData({
+          banners:res.data.banners
+        })
       }
     })
-    console.log(2)
+    // console.log(2)
   },
 
   /**
