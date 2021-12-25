@@ -23,6 +23,7 @@
     </swiper-item>
   </swiper>
 
+  <!-- 导航区域结构 -->
   <view class="nav">
     <view class="navItem">
       <view class="iconfont icon-meirituijian-"></view>
@@ -44,5 +45,67 @@
       <view  class="iconfont icon-zhiboguankanliangbofangsheyingshexiangjixianxing"></view>
       <view class="navTitle">直播</view>
     </view>
+  </view>
+
+  <!-- 推荐歌曲区域结构 -->
+  <view class="recommendContainer">
+    <view class="header">
+      <view class="title">推荐歌曲</view>
+      <view class="moreContent">
+        <view class="moreTitle">为你精心推荐</view>
+        <view class="more">查看更多</view>
+      </view>
+    </view>
+
+    <scroll-view 
+    class="recommendScroll"
+    enable-flex
+    scroll-x
+    >
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+      <view class="recommendItem">
+        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
+        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      </view>
+    </scroll-view>
   </view>
 </view>

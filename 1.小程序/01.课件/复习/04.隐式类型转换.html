@@ -10,6 +10,7 @@
     <script>
         // js中的6个false值:false,0,NaN,"",undefined,null
 
+        // 隐式类型转换(==),一定是双方数据类型不同才会进行类型转换
         // 基础数据类型VS基础数据类型   =>  toNumber
         // console.log("1",true==1);   //true  1===1
         // console.log("2",true=="1"); //true  1===1
@@ -30,12 +31,20 @@
         
         // 对象数据类型VS基础数据类型
         // valueOf -> toString
+        // valueOf -> 只给Number,String,Boolean的实例对象使用
         // console.log("12",[]==![]);  //true     => []==false =>  ''==false =>  0===0  
         // console.log("14",{}==!{});  //false    => {}==false =>  '[object Object]'==false => NaN===0
 
-        console.log(0=="0") //true
-        console.log(0==[])  //true
-        console.log("0"==[])  //false   =>  "0"==""
+        // console.log(0=="0") //true
+        // console.log(0==[])  //true
+        // console.log("0"==[])  //false   =>  "0"==""
+
+        // var num = 3;
+        // num.count=6;
+        // console.log(num,num + num.count)
+
+        // var num = new Number(7);
+        // console.log(num==7)
 
 
 

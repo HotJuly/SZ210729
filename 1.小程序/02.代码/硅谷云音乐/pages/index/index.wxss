@@ -24,3 +24,67 @@
 .indexContainer .nav .navItem .navTitle{
   font-size:28rpx;
 }
+
+/* 
+  推荐歌曲区域样式开始
+ */
+
+ .recommendContainer{
+   padding:0 20rpx;
+ }
+
+ .recommendContainer .recommendScroll{
+   display:flex;
+ }
+
+ .recommendContainer .recommendScroll .recommendItem{
+   width:200rpx;
+   margin-right:20rpx;
+ }
+
+ .recommendContainer .recommendScroll .recommendItem .recommendImg{
+   width:200rpx;
+   height:200rpx;
+   border-radius: 20rpx;
+ }
+
+ .recommendContainer .recommendScroll .recommendItem .title{
+   /*
+    需求:单行文本溢出隐藏,并显示省略号
+    拆解:
+      1.如何将多行文本变成单行文本
+      2.如何实现溢出隐藏
+      3.如何显示省略号
+
+    需求:多行文本溢出隐藏,并显示省略号
+   */
+   /* white-space:nowrap;
+   overflow:hidden;
+   text-overflow:ellipsis; */
+
+   display:-webkit-box;
+   -webkit-line-clamp:2;
+   -webkit-box-orient:vertical;
+   overflow:hidden;
+ }
+
+.header .title{
+  font-size:28rpx;
+}
+
+.header .moreContent .moreTitle{
+  float: left;
+  font-size:30rpx;
+}
+
+.header .moreContent .more{
+  float: right;
+  font-size:24rpx;
+  padding:10rpx 20rpx;
+  border:1rpx solid;
+  border-radius: 15rpx;
+}
+
+ /*
+  推荐歌曲区域样式结束
+ */
