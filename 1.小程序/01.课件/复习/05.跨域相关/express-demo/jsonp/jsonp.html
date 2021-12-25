@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">发送请求</button>
+    <script>
+        var data;
+        // 声明一个函数用于接收数据
+        function getData(data){
+            console.log(data)
+            window.data=data
+        }
+        btn.onclick=function(){
+            let script = document.createElement('script');
+            // 页面上的script标签只要拥有src属性,就会立马发送请求获取资源
+            // script标签得到的内容,一定会解析为js来执行(会自动执行)
+
+            // src只能是字符串,所以getData是一个函数名称,并不是整个函数
+            script.src="http://localhost:5000/jsonp?callback=getData"
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+</html>
