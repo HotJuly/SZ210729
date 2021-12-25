@@ -35,6 +35,7 @@
 
  .recommendContainer .recommendScroll{
    display:flex;
+   height:300rpx;
  }
 
  .recommendContainer .recommendScroll .recommendItem{
@@ -68,23 +69,44 @@
    overflow:hidden;
  }
 
-.header .title{
-  font-size:28rpx;
-}
-
-.header .moreContent .moreTitle{
-  float: left;
-  font-size:30rpx;
-}
-
-.header .moreContent .more{
-  float: right;
-  font-size:24rpx;
-  padding:10rpx 20rpx;
-  border:1rpx solid;
-  border-radius: 15rpx;
-}
-
  /*
   推荐歌曲区域样式结束
  */
+
+ /* 排行榜区域开始 */
+ .topContainer{
+   padding:0 20rpx;
+ }
+
+ .topContainer .topSwiper{
+   height:2000rpx;
+ }
+
+ .topContainer .topSwiper .topSwiperItem .topItem .songItem{
+   display:flex;
+   align-items: center;
+   margin:20rpx 0;
+ }
+
+ .topContainer .topSwiper .topSwiperItem .topItem .songItem .songImg{
+   width:100rpx;
+   height:100rpx;
+   border-radius: 20rpx;
+   flex-shrink: 0;
+ }
+
+ .topContainer .topSwiper .topSwiperItem .topItem .songItem .songIndex{
+  width:100rpx;
+  height:100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  flex-shrink: 0;
+}
+
+.topContainer .topSwiper .topSwiperItem .topItem .songItem .songName{
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+ /* 排行榜区域结束 */

@@ -10,7 +10,7 @@
 import config from './config';
 // const baseUrl1 = "http://localhost:3000"
 export default function(url,data={},method="GET"){
-    // 发送请求是同步发送,但是响应是异步接受(响应属于宏任务)
+    // 发送请求是同步发送,但是响应是异步接收(响应属于宏任务)
     // let result;
     return new Promise((resolve,reject)=>{
         wx.request({

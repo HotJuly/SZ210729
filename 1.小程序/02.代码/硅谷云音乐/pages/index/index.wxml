@@ -49,13 +49,8 @@
 
   <!-- 推荐歌曲区域结构 -->
   <view class="recommendContainer">
-    <view class="header">
-      <view class="title">推荐歌曲</view>
-      <view class="moreContent">
-        <view class="moreTitle">为你精心推荐</view>
-        <view class="more">查看更多</view>
-      </view>
-    </view>
+    <!-- NavHeader区域 -->
+    <NavHeader title="推荐歌曲" moreTitle="为你精心推荐"></NavHeader>
 
     <scroll-view 
     class="recommendScroll"
@@ -71,5 +66,71 @@
         <view class="title">{{item.name}}</view>
       </view>
     </scroll-view>
+  </view>
+
+  <view class="topContainer">
+    <NavHeader title="排行榜" moreTitle="热歌风向标"></NavHeader>
+    <swiper class="topSwiper" next-margin="100rpx">
+      <swiper-item class="topSwiperItem">
+        <view class="topItem">
+          <view class="topTitle">云音乐国电榜</view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <text class="songIndex">1</text>
+            <view class="songName">买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱</view>
+          </view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item class="topSwiperItem">
+        <view class="topItem">
+          <view class="topTitle">云音乐国电榜</view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+        </view>
+      </swiper-item>
+      <swiper-item class="topSwiperItem">
+        <view class="topItem">
+          <view class="topTitle">云音乐国电榜</view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+          <view class="songItem">
+            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
+            <view class="songIndex">1</view>
+            <view class="songName">买不到的快乐之大作的爱</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
   </view>
 </view>
