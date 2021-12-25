@@ -79,7 +79,7 @@
  }
 
  .topContainer .topSwiper{
-   height:2000rpx;
+   height:450rpx;
  }
 
  .topContainer .topSwiper .topSwiperItem .topItem .songItem{

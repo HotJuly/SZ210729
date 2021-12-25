@@ -19,7 +19,7 @@
     wx:for-index="myIndex"
     wx:key="bannerId"
     >
-      <image class="bannerImg" src="{{banner.pic}}"></image>
+      <image lazy-load class="bannerImg" src="{{banner.pic}}"></image>
     </swiper-item>
   </swiper>
 
@@ -62,7 +62,7 @@
       wx:for="{{recommendList}}"
       wx:key="id"
       >
-        <image class="recommendImg" src="{{item.picUrl}}"></image>
+        <image lazy-load class="recommendImg" src="{{item.picUrl}}"></image>
         <view class="title">{{item.name}}</view>
       </view>
     </scroll-view>
@@ -71,63 +71,21 @@
   <view class="topContainer">
     <NavHeader title="排行榜" moreTitle="热歌风向标"></NavHeader>
     <swiper class="topSwiper" next-margin="100rpx">
-      <swiper-item class="topSwiperItem">
+      <swiper-item 
+      class="topSwiperItem"
+      wx:for="{{topList}}"
+      wx:key="id"
+      >
         <view class="topItem">
-          <view class="topTitle">云音乐国电榜</view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <text class="songIndex">1</text>
-            <view class="songName">买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱买不到的快乐之大作的爱</view>
-          </view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-        </view>
-      </swiper-item>
-      <swiper-item class="topSwiperItem">
-        <view class="topItem">
-          <view class="topTitle">云音乐国电榜</view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-        </view>
-      </swiper-item>
-      <swiper-item class="topSwiperItem">
-        <view class="topItem">
-          <view class="topTitle">云音乐国电榜</view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
-          </view>
-          <view class="songItem">
-            <image class="songImg" src="/static/images/dazuo.jpeg"></image>
-            <view class="songIndex">1</view>
-            <view class="songName">买不到的快乐之大作的爱</view>
+          <view class="topTitle">{{item.name}}</view>
+          <view 
+          class="songItem"
+          wx:for="{{item.list}}"
+          wx:key="id"
+          >
+            <image lazy-load class="songImg" src="{{item.picUrl}}"></image>
+            <text class="songIndex">{{index + 1}}</text>
+            <view class="songName">{{item.name}}</view>
           </view>
         </view>
       </swiper-item>

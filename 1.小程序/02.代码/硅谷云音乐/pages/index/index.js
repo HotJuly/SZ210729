@@ -9,7 +9,10 @@ Page({
     banners:[],
 
     // 首页推荐歌曲数据
-    recommendList:[]
+    recommendList:[],
+
+    // 首页排行榜数据
+    topList:[]
 
   },
 
@@ -84,6 +87,33 @@ Page({
     //   banners:result.banners,
     //   recommendList:result1.result
     // })
+
+    let topList=[];
+    let arr=[1,2,8,9,10];
+    let index=0;
+
+    while(index<arr.length){
+      myAxios('/top/list',{idx:arr[index++]})
+      .then((res)=>{
+        console.log('list',res)
+        const {playlist} = res
+  
+        // map可以返回一个全新数组,数组的长度与旧数组相同
+        let obj = {
+          name:playlist.name,
+          list:playlist.tracks.slice(0,3).map((item)=>{
+            return item.al
+          }),
+          id:playlist.id
+        };
+  
+        topList.push(obj)
+        this.setData({
+          topList
+        })
+      })
+  
+    }
   },
 
   /**
