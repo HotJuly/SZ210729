@@ -62,49 +62,13 @@
     enable-flex
     scroll-x
     >
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
-      </view>
-      <view class="recommendItem">
-        <image class="recommendImg" src="/static/images/nvshen.jpg"></image>
-        <view class="title">大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一</view>
+      <view 
+      class="recommendItem"
+      wx:for="{{recommendList}}"
+      wx:key="id"
+      >
+        <image class="recommendImg" src="{{item.picUrl}}"></image>
+        <view class="title">{{item.name}}</view>
       </view>
     </scroll-view>
   </view>

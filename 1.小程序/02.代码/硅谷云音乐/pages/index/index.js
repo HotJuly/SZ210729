@@ -1,3 +1,4 @@
+import myAxios from '../../utils/myAxios.js';
 Page({
 
   /**
@@ -5,14 +6,17 @@ Page({
    */
   data: {
     //首页轮播图数据
-    banners:[]
+    banners:[],
+
+    // 首页推荐歌曲数据
+    recommendList:[]
 
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad:async function (options) {
     /*
       请求必须知道的三件事
         1.在哪发
@@ -29,22 +33,57 @@ Page({
               3.请求方式
     
     */
-    //  console.log('wx',wx)
-    // console.log(1)  
-    wx.request({
-      url:"http://localhost:3000/banner",
-      data:{
-        type:2
-      },
-      success:(res)=>{
-        // res就是响应报文,其中具有响应头和响应体
-        console.log('res',res)
-        this.setData({
-          banners:res.data.banners
-        })
-      }
+
+    // 用于请求轮播图数据
+    // wx.request({
+    //   url:"http://localhost:3000/banner",
+    //   data:{
+    //     type:2
+    //   },
+    //   success:(res)=>{
+    //     // res就是响应报文,其中具有响应头和响应体
+    //     // console.log('res',res)
+    //     this.setData({
+    //       banners:res.data.banners
+    //     })
+    //   }
+    // })
+    // const result = await myAxios("/banner",{type:2});
+    myAxios("/banner",{type:2})
+    .then((result)=>{
+      this.setData({
+        banners:result.banners
+      })
     })
-    // console.log(2)
+    // console.log('result1',result)
+    // this.setData({
+    //   banners:result.banners
+    // })
+
+    
+    // 用于请求推荐歌曲区域数据
+    // wx.request({
+    //   url:"http://localhost:3000/personalized",
+    //   success:(res)=>{
+    //     this.setData({
+    //       recommendList:res.data.result
+    //     })
+    //   }
+    // })
+    
+    myAxios("/personalized")
+    .then((result)=>{
+      this.setData({
+        recommendList:result.result
+      })
+    })
+
+    
+    // const result1 = await myAxios("/personalized");
+    // this.setData({
+    //   banners:result.banners,
+    //   recommendList:result1.result
+    // })
   },
 
   /**
