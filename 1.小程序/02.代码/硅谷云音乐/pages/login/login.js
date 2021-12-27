@@ -1,53 +1,47 @@
-// pages/personal/personal.js
+// pages/login/login.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
-        // 用于存储手指移动距离
-        moveDistance:0,
-
-        //  用于控制元素移动的过渡样式
-        moveTransition:""
+        // 用于收集用户的手机号码
+        phone:"17688197777",
+        password:"",
+        form:{
+            phone:"123"
+        }
     },
 
-    // 用于跳转到登录界面
-    toLogin(){
-        wx.navigateTo({
-          url: '/pages/login/login'
-        })
-    },
-
-    // 用于监视用户手指按下事件
-    handleTouchStart(event){
-        // console.log('handleTouchStart',event)
-        this.startY = event.touches[0].clientY;
+    // 用于监视用户修改phone输入框,并同步修改data中的数据
+    handlePhone(event){
+        // 通过event.detail.value可以获取到输入框的最新值
+        // console.log('handlePhone',event)
+        const phone = event.detail.value;
         this.setData({
-            moveTransition:""
+            phone
         })
     },
 
-    // 用于监视用户手指滑动事件
-    handleTouchMove(event){
-        // console.log('handleTouchMove',event)
-        const moveY = event.touches[0].clientY;
-        const moveDistance = moveY - this.startY;
-        console.log('moveDistance',moveDistance)
-        if(moveDistance>=80||moveDistance<=0)return;
+    // 用于监视用户修改password输入框,并同步修改data中的数据
+    handlePassWord(event){
+        // 通过event.detail.value可以获取到输入框的最新值
+        const password = event.detail.value;
         this.setData({
-            moveDistance
+            password
         })
     },
 
-    // 用于监视用户手指滑动事件
-    handleTouchEnd(){
+    // 通过一个函数,收集到两个输入框的数据,并实现更新data
+    handleChange(event){
+        // 需要在执行函数的时候,就知道是哪个输入框触发的该函数
+        const type = event.target.dataset.type;
+        const value = event.detail.value;
         this.setData({
-            moveTransition:"transform 1s",
-            moveDistance:0
+            [type]:value
         })
     },
+
 
     /**
      * 生命周期函数--监听页面加载

@@ -1,5 +1,5 @@
 <view class="personalContainer">
-  <view class="user-section">
+  <view class="user-section" bindtap="toLogin">
     <image class="bg" src="/static/images/personal/bgImg2.jpg"></image>
 
 
