@@ -59,7 +59,7 @@ Page({
         })
 
         // 5.接收响应,区分成功失败
-        console.log(result)
+        // console.log(result)
         const code = result.code;
         // if(code===200){
         //     // 能进入这里,说明用户登录成功
@@ -97,9 +97,16 @@ Page({
                   icon:"none"
                 })
 
-                wx.setStorageSync("userInfo",result.profile)
+                // wx.setStorageSync("userInfo",result.profile)
+                wx.setStorage({
+                    key:"userInfo",
+                    data:result.profile
+                })
+                
+                // console.log(wx.getStorageSync('userInfo'))
 
                 // 用于跳转到指定的tabBar页面
+                // switchTab可以跳转tabBar页面,并且关闭所有非tabBar页面
                 wx.switchTab({
                   url: '/pages/personal/personal'
                 })
