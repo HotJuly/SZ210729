@@ -177,6 +177,29 @@
   text-indent: 40rpx;
 }
 
+.playContent .playScroll{
+  display:flex;
+  height:150rpx;
+}
+
+.playContent .playScroll .playImg{
+  width:150rpx;
+  height:150rpx;
+  flex-shrink: 0;
+  margin-right:20rpx;
+}
+
+.playContent .playList{
+  display:flex;
+  height:150rpx;
+}
+
+.playContent .playList .playImg{
+  width:150rpx;
+  height:150rpx;
+  margin-right:20rpx;
+}
+
 
 .cardList {
   margin-top: 1rpx;

@@ -1,4 +1,5 @@
 // pages/personal/personal.js
+import myAxios from '../../utils/myAxios';
 Page({
 
     /**
@@ -13,7 +14,13 @@ Page({
         moveTransition:"",
 
         // 用于存储用户个人信息
-        userInfo:{}
+        userInfo:{},
+
+        // 用于测试wx:if语法使用
+        isShow:false,
+
+        // 用于存储最近播放记录列表
+        playList:[]
     },
 
     // 用于跳转到登录界面
@@ -69,11 +76,20 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow:async function () {
         const userInfo = wx.getStorageSync("userInfo");
         // console.log(userInfo)
         this.setData({
             userInfo
+        })
+        // console.log(this.$myAxios)
+        // this.$myAxios('/user/record',{uid:userInfo.userId})
+        const result = await myAxios('/user/record',{uid:userInfo.userId,type:1});
+        // console.log('result',result);
+        this.setData({
+            playList:result.weekData.map((item)=>{
+                return item.song.al
+            })
         })
     },
 
