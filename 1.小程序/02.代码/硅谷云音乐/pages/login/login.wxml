@@ -16,7 +16,7 @@
         <input id="password" type="password" data-type="password" placeholder="请输入密码" value="{{password}}" bindchange="handleChange" />
       </view>
     </view>
-    <button class="confirm-btn">登录</button>
+    <button bindtap="handleLogin" class="confirm-btn">登录</button>
     <view class="forget-section">
       忘记密码?
     </view>

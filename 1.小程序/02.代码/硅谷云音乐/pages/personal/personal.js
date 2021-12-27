@@ -10,7 +10,10 @@ Page({
         moveDistance:0,
 
         //  用于控制元素移动的过渡样式
-        moveTransition:""
+        moveTransition:"",
+
+        // 用于存储用户个人信息
+        userInfo:{}
     },
 
     // 用于跳转到登录界面
@@ -53,7 +56,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        // 由于personal页面是一个tabBar页面,他一直存在,不会销毁,所以onLoad不太好使,只会执行一次
     },
 
     /**
@@ -67,7 +70,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        const userInfo = wx.getStorageSync("userInfo");
+        // console.log(userInfo)
+        this.setData({
+            userInfo
+        })
     },
 
     /**
