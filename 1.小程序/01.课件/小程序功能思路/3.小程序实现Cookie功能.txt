@@ -1,0 +1,19 @@
+问题:小程序中不支持Cookie,导致接口使用失败
+需求:在小程序中,实现Cookie的相关功能
+拆解:
+	1.自动存储Cookie
+		决定将Cookie数据存入到Storage中,可以保证Cookie不会丢失
+		服务器是通过响应头返回Cookie相关数据的
+		
+
+	2.自动发送
+		浏览器通过请求头中设置Cookie属性,实现将数据传递给服务器的操作
+
+	问题:如何保存Cookie
+	解决:Storage
+
+	问题:哪些Cookie需要保存?
+	解决:需要保存登录之后,和用户唯一标识相关的cookie
+		登录接口返回的cookie中,具有一个MUSIC_U开头的cookie需要保存
+
+	

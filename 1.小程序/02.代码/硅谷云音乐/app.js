@@ -1,8 +1,12 @@
 // app.js
 import myAxios from './utils/myAxios';
-Page.prototype.$myAxios = myAxios;
 App({
     onLaunch(){
+      const PageFn = Page;
+      Page = function(config){
+        config.myAxios = myAxios;
+        return PageFn(config)
+      }
     }
 })
-console.log(Page.prototype.$myAxios)
+

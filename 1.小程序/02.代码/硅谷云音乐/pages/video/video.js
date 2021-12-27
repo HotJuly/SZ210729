@@ -41,12 +41,17 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow:async function () {
-        const result = await myAxios('/video/group/list');
+
+        // 用于请求导航列表
+        const result = await this.myAxios('/video/group/list');
         this.setData({
             navList:result.data.slice(0,14),
-            navId:result.data[0].id
+            // navId:result.data[0].id
+            navId:60100
             // navId:this.data.navList[0].id
         })
+
+        await this.myAxios('/video/group',{id:this.data.navId});
     },
 
     /**

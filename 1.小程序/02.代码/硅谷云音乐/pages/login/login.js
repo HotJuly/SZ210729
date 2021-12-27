@@ -55,11 +55,12 @@ Page({
         //4.发送请求
         const result = await myAxios('/login/cellphone',{
             phone,
-            password
+            password,
+            _isLogin:true
         })
 
         // 5.接收响应,区分成功失败
-        // console.log(result)
+        console.log('result',result)
         const code = result.code;
         // if(code===200){
         //     // 能进入这里,说明用户登录成功

@@ -17,8 +17,25 @@ export default function(url,data={},method="GET"){
             url:config.mpHost + url,
             data,
             method,
+            header:{
+              Cookie:wx.getStorageSync("cookie")
+            },
             success:(res)=>{
-            //   console.log('res',res)
+              // console.log('res',res)
+
+            // 由于每个接口都具有cookie数组,所以,需要判断是否是登录接口,如果是才保存他的cookie,否则很可能导致有效cookie被覆盖
+            // if(url==="/login/cellphone"){
+            if(data._isLogin){
+              wx.setStorage({
+                key:"cookie",
+                data:res.cookies.find((item)=>{
+                  // console.log(item.startsWith("MUSIC_U"))
+                  return item.startsWith("MUSIC_U")
+                })
+              })
+            }
+
+
             //   result=res;
               // res就是响应报文,其中具有响应头和响应体
             //   但是开发者只想要data数据

@@ -82,10 +82,8 @@ Page({
         this.setData({
             userInfo
         })
-        // console.log(this.$myAxios)
-        // this.$myAxios('/user/record',{uid:userInfo.userId})
         const result = await myAxios('/user/record',{uid:userInfo.userId,type:1});
-        // console.log('result',result);
+        
         this.setData({
             playList:result.weekData.map((item)=>{
                 return item.song.al
