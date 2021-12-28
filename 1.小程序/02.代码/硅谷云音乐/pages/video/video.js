@@ -13,7 +13,59 @@ Page({
         navId:null,
 
         // 用于存储视频列表数据
-        videoList:[]
+        videoList:[],
+
+        // 用于控制下拉动画的显示隐藏
+        isTriggered:true
+    },
+
+    // 用于监视用户下拉scroll-view区域刷新操作
+    async handlePullDown(){
+        // console.log('handlePullDown')
+        await this.getVideoList();
+        this.setData({
+            isTriggered:false
+        })
+    },
+
+    // 专门用于请求导航列表数据
+    async getNavList(){
+        const result = await this.myAxios('/video/group/list');
+        this.setData({
+            navList:result.data.slice(0,14),
+            navId:result.data[0].id
+            // navId:60100
+            // navId:this.data.navList[0].id
+        })
+    },
+
+    // 用于监视用户播放视频操作
+    handlePlay(event){
+        // console.log('handlePlay',event)
+        // console.log(this.oldVid)
+
+        // 如何知道当前视频vid
+        // 可以通过标签属性id或者自定义属性进行通信
+        const {id} =event.currentTarget;
+
+        if(this.oldVid&&this.oldVid!==id){
+            const videoContext = wx.createVideoContext(this.oldVid);
+            
+            videoContext.pause();
+        }
+        // 将本次视频vid缓存,留作下次使用
+        // 这一次就是下一次的上一次
+        this.oldVid=id;
+    },
+
+    // 该方法仅用于测试API,不是真正需求
+    testApi(){
+        // console.log('testApi')
+        // 获取video上下文对象
+        const videoContext = wx.createVideoContext("3619ACBBBAA34F4B1D7D48C812E5A961");
+
+        // 通过videoContext的API控制视频播放
+        videoContext.pause();
     },
 
     // 专门用于请求对应标签的视频列表数据
@@ -75,13 +127,7 @@ Page({
     onShow:async function () {
 
         // 用于请求导航列表
-        const result = await this.myAxios('/video/group/list');
-        this.setData({
-            navList:result.data.slice(0,14),
-            navId:result.data[0].id
-            // navId:60100
-            // navId:this.data.navList[0].id
-        })
+        await this.getNavList();
 
         //封装请求视频列表的函数
         this.getVideoList();
@@ -104,8 +150,12 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh:async function () {
+        // console.log('onPullDownRefresh') 
+        await this.getNavList();
 
+        //封装请求视频列表的函数
+        this.getVideoList();
     },
 
     /**

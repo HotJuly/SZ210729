@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            async函数其实是Promise+then的语法糖
+            await之后的代码,都在.then中
+            async函数的返回值一定是一个promise对象
+                pending
+                resolved
+                    只要async函数成功执行完所有的代码,返回的promise对象会直接变成成功状态
+                    return结果会作为promise的result
+                rejected
+                    如果async函数执行过程中出现错误,返回的promise对象会立马变成失败状态
+        */
+        async function a(){
+            console.log(1)
+
+            await Promise.reject();
+
+            // setTimeout(()=>{
+            //     console.log(2);
+            // },0)
+
+            new Promise((resolve)=>{
+                resolve()
+                console.log(3)
+            })
+            // setTimeout(()=>{
+            //     console.log(4);
+            // },1000)
+
+            console.log(5)
+            return 123;
+        }
+
+        // Promise.resolve().then(()=>{
+        //     new Promise((resolve)=>{
+        //         resolve()
+        //         console.log(3)
+        //     })
+        //     console.log(5)
+        //     return 123;
+        // })
+        // .then((data)=>{
+
+        // })
+
+        console.log(6)
+        const b = a();
+        console.log(b)
+        // console.log(7)
+    </script>
+</body>
+</html>
