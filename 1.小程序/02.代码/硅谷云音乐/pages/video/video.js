@@ -19,6 +19,20 @@ Page({
         isTriggered:true
     },
 
+    // 用于监视用户上拉scroll-view区域触底操作
+    handleScrollToLower(){
+        // console.log('handleScrollToLower')
+        if(this.loading)return;
+        this.loading=true;
+        // console.log(1)
+        setTimeout(()=>{
+            this.setData({
+                videoList:[...this.data.videoList,...this.data.videoList.slice(0,8)]
+            })
+            this.loading=false;
+        },2000)
+    },
+
     // 用于监视用户下拉scroll-view区域刷新操作
     async handlePullDown(){
         // console.log('handlePullDown')
@@ -162,13 +176,34 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        console.log('onReachBottom')
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
-
+    onShareAppMessage: function ({from,target}) {
+        console.log('onShareAppMessage',from,target)
+        if(from==="button"){
+            // 能进入该判断,说明用户点击的是button按钮进行的转发
+            // 也就是说用户想要转发当前文章或者页面
+            // 此处的target相当于是tap事件中的event.currentTarget
+            // 自定义属性无法区分大小写,会统一转为小写
+            const {title,imageurl} = target.dataset;
+            // console.log('button',target.dataset)
+            return{
+                title,
+                path:"/pages/video/video",
+                imageUrl:imageurl
+            }
+        }else{
+            // 能进入该判断,说明用户点击的是右上角转发按钮进行的转发
+            // 也就是说用户想要转发当前小程序
+            return {
+                title:"硅谷云音乐",
+                path:"/pages/index/index",
+                imageUrl:"/static/images/dazuo.jpeg"
+            }
+        }
     }
 })
