@@ -14,6 +14,18 @@ Page({
         recommendList:[]
     },
 
+    // 用于监视用户点击歌曲卡片,实现跳转song页面功能
+    toSong(event){
+        // console.log(event.currentTarget.dataset)
+        // const song = event.currentTarget.dataset.song
+        const songId = event.currentTarget.dataset.songid
+
+        // url具有长度限制,只能传递小体量数据
+        wx.navigateTo({
+          url: '/pages/song/song?songId='+songId,
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */

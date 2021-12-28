@@ -18,6 +18,9 @@
     <scroll-view class="scrollView" scroll-y>
       <view 
       class="recommendItem"
+      bindtap="toSong"
+      data-song="{{item}}"
+      data-songid="{{item.id}}"
       wx:for="{{recommendList}}"
       wx:key="id"
       >
