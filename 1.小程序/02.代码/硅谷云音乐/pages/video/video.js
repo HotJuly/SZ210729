@@ -10,16 +10,48 @@ Page({
         navList:[],
 
         // 用于监视用户点击导航列表选项操作
-        navId:null
+        navId:null,
+
+        // 用于存储视频列表数据
+        videoList:[]
+    },
+
+    // 专门用于请求对应标签的视频列表数据
+    async getVideoList(){
+        this.setData({
+            videoList:[]
+        });
+
+        const result1 = await this.myAxios('/video/group',{id:this.data.navId});
+        
+        // console.log(2)
+
+        this.setData({
+            videoList:result1.datas.map((item)=>{
+                return item.data
+            })
+        })
     },
 
     // 用于监视用户点击导航列表操作
-    changeNavId(event){
+    async changeNavId(event){
         // const navId = event.target.dataset.id;
         const navId = event.currentTarget.dataset.id;
         this.setData({
             navId
         })
+
+        wx.showLoading({
+          title: '加载中...',
+          mask:true
+        })
+
+        // console.log(1)
+        // 发送请求获取对应标签的视频列表
+        await this.getVideoList();
+
+        // console.log(3)
+        wx.hideLoading();
         // console.log('changeNavId')
     },
 
@@ -46,12 +78,13 @@ Page({
         const result = await this.myAxios('/video/group/list');
         this.setData({
             navList:result.data.slice(0,14),
-            // navId:result.data[0].id
-            navId:60100
+            navId:result.data[0].id
+            // navId:60100
             // navId:this.data.navList[0].id
         })
 
-        await this.myAxios('/video/group',{id:this.data.navId});
+        //封装请求视频列表的函数
+        this.getVideoList();
     },
 
     /**

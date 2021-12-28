@@ -25,15 +25,15 @@ export default function(url,data={},method="GET"){
 
             // 由于每个接口都具有cookie数组,所以,需要判断是否是登录接口,如果是才保存他的cookie,否则很可能导致有效cookie被覆盖
             // if(url==="/login/cellphone"){
-            if(data._isLogin){
-              wx.setStorage({
-                key:"cookie",
-                data:res.cookies.find((item)=>{
-                  // console.log(item.startsWith("MUSIC_U"))
-                  return item.startsWith("MUSIC_U")
+              if(data._isLogin){
+                wx.setStorage({
+                  key:"cookie",
+                  data:res.cookies.find((item)=>{
+                    // console.log(item.startsWith("MUSIC_U"))
+                    return item.startsWith("MUSIC_U")
+                  })
                 })
-              })
-            }
+              }
 
 
             //   result=res;
