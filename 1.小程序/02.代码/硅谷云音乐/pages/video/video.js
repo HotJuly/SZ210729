@@ -16,7 +16,31 @@ Page({
         videoList:[],
 
         // 用于控制下拉动画的显示隐藏
-        isTriggered:true
+        isTriggered:true,
+
+        // 用于控制页面上image组件和video组件的切换(记录用户点击的图片)
+        currentId:null
+    },
+
+    // 用于监视用户点击图片操作,同时自动播放对应视频
+    handleTap(event){
+        // console.log('handleTap',event)
+        const currentId = event.currentTarget.id;
+
+        // 通过更新状态数据,控制页面的video组件显示
+        // setData的第二个实参需要是函数类型,该函数会在视图更新之后才执行
+        // 类似于Vue的nextTick
+        this.setData({
+            currentId
+        },()=>{
+            const videoContext = wx.createVideoContext(currentId)
+            videoContext.play()
+        })
+        
+        // const videoContext = wx.createVideoContext(currentId)
+        // videoContext.play()
+
+
     },
 
     // 用于监视用户上拉scroll-view区域触底操作
@@ -139,6 +163,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow:async function () {
+
+        // 判断用户是否已经登录
+        if(!this.hasPermission())return;
 
         // 用于请求导航列表
         await this.getNavList();
