@@ -6,7 +6,31 @@ Page({
      */
     data: {
         // 用于存储当前页面歌曲详细信息
-        songObj:{}
+        songObj:{},
+
+        // 用于存储当前页面歌曲的url信息
+        musicUrl:"",
+
+        // 用于控制当前页面的C3效果
+        isPlay:false
+    },
+
+    // 用于监视用户点击播放按钮,实现歌曲播放功能
+    handlePlay(){
+        // console.log('handlePlay1')
+        const backgroundAudioManager = wx.getBackgroundAudioManager();
+        if(!this.data.isPlay){
+            backgroundAudioManager.src=this.data.musicUrl;
+            backgroundAudioManager.title=this.data.songObj.name;
+
+        }else{
+            backgroundAudioManager.pause();
+        }
+        
+        this.setData({
+            isPlay:!this.data.isPlay
+        })
+        // console.log('handlePlay2')
     },
 
     /**
@@ -27,6 +51,11 @@ Page({
 
         wx.setNavigationBarTitle({
             title:this.data.songObj.name
+        })
+
+        const result2 = await this.myAxios('/song/url',{id:songId})
+        this.setData({
+            musicUrl:result2.data[0].url
         })
         // console.log('result',result)
     },
