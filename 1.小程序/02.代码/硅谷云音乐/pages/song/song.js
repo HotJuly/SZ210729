@@ -17,7 +17,49 @@ Page({
         isPlay:false,
 
         // 用于存储当前页面歌曲id
-        songId:null
+        songId:null,
+
+        // 用于记录歌曲当前时间
+        currentTime:"00:00",
+
+        // 用于记录歌曲总时间
+        durationTime:"--:--",
+
+        // 用于记录歌曲的播放百分比
+        currentWidth:0
+    },
+
+    // 用于绑定与背景音频管理器相关的事件监听
+    addEvent(){
+        // onPlay是一个方法,不是一个普通属性
+        // 用于监视背景音频的是否正在播放
+        this.backgroundAudioManager.onPlay(()=>{
+            // console.log('onPlay')
+            this.setData({
+                isPlay:true
+            })
+
+            appInstance.globalData.playState=true;
+        })
+
+        // 用于监视背景音频的是否处于暂停
+        this.backgroundAudioManager.onPause(()=>{
+            // console.log('onPause')
+            this.setData({
+                isPlay:false
+            })
+            appInstance.globalData.playState=false;
+        })
+
+        // 用于监视背景音频的进度更新事件
+        this.backgroundAudioManager.onTimeUpdate(()=>{
+            // console.log('onTimeUpdate',this.backgroundAudioManager.currentTime)
+            this.setData({
+                currentTime:this.moment(this.backgroundAudioManager.currentTime*1000).format("mm:ss"),
+                // currentWidth:this.backgroundAudioManager.currentTime/this.data.songObj.dt
+                currentWidth:this.backgroundAudioManager.currentTime/this.backgroundAudioManager.duration*100
+            })
+        })
     },
 
     // 专门用于请求歌曲的详细信息
@@ -27,7 +69,8 @@ Page({
             ids:this.data.songId
         })
         this.setData({
-            songObj:result.songs[0]
+            songObj:result.songs[0],
+            durationTime:this.moment(result.songs[0].dt).format("mm:ss")
         })
 
         wx.setNavigationBarTitle({
@@ -44,9 +87,9 @@ Page({
     },
 
     // 用于监视用户点击下一首按钮操作
-    switchType(){
-
-        PubSub.publish('switchType',"next");
+    switchType(event){
+        const type = event.currentTarget.id;
+        PubSub.publish('switchType',type);
     },
 
     // 用于监视用户点击播放按钮,实现歌曲播放功能
@@ -105,7 +148,7 @@ Page({
 
         const {playState,audioId} = appInstance.globalData;
         // console.log('onLoad',playState,audioId,this.data.songId)
-        if(playState&&audioId === this.data.songId*1){
+        if(playState&&audioId == this.data.songId){
             this.setData({
                 isPlay:true
             })
@@ -135,6 +178,8 @@ Page({
             // 缓存当前播放歌曲id
             appInstance.globalData.audioId=this.data.songId;
         })
+
+        this.addEvent();
     },
 
     /**

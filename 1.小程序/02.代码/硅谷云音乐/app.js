@@ -1,12 +1,14 @@
 // app.js
 import myAxios from './utils/myAxios';
 import hasPermission from './utils/hasPermission';
+import moment from 'moment';
 App({
     onLaunch(){
       const PageFn = Page;
       Page = function(config){
         config.myAxios = myAxios;
         config.hasPermission = hasPermission;
+        config.moment = moment;
 
         // console.log(config.onShow)
 

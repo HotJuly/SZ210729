@@ -38,7 +38,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        PubSub.subscribe('switchType',(msg,type)=>{
+        this.token = PubSub.subscribe('switchType',(msg,type)=>{
             // console.log('switchType',msg,type)
             let {currentIndex,recommendList} = this.data;
             if(type==="next"){
@@ -107,7 +107,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        PubSub.unsubscribe(this.token)
     },
 
     /**

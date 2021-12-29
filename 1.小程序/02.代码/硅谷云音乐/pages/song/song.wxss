@@ -106,13 +106,13 @@
 /* 进度条样式开始 */
 .barContainer{
   display:flex;
-  align-items:center;
+  align-items: center;
 }
 
 .barContainer .wrap{
   width:450rpx;
-  height:4rpx;
-  background:rgba(0,0,0,0.5);
+  height:8rpx;
+  background-color: #666;
   margin:0 20rpx;
 }
 
@@ -120,16 +120,16 @@
   position: relative;
   width:0%;
   height:100%;
-  background: red;
+  background-color: red;
 }
 
 .barContainer .wrap .inner .point{
   position: absolute;
-  width: 12rpx;
-  height:12rpx;
   right:-6rpx;
-  top:-4rpx;
-  background:white;
+  top:-2rpx;
+  width:12rpx;
+  height:12rpx;
+  background-color: white;
   border-radius: 50%;
 }
 /* 进度条样式结束 */
