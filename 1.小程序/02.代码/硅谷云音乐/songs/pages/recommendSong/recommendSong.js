@@ -30,7 +30,7 @@ Page({
         })
         // url具有长度限制,只能传递小体量数据
         wx.navigateTo({
-          url: '/pages/song/song?songId='+songId,
+          url: '/songs/pages/song/song?songId='+songId,
         })
     },
 
