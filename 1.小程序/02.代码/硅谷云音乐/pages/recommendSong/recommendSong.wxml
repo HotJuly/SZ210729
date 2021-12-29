@@ -20,6 +20,7 @@
       class="recommendItem"
       bindtap="toSong"
       data-song="{{item}}"
+      data-index="{{index}}"
       data-songid="{{item.id}}"
       wx:for="{{recommendList}}"
       wx:key="id"

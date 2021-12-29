@@ -1,4 +1,5 @@
 // pages/song/song.js
+import PubSub from 'pubsub-js'
 const appInstance = getApp();
 Page({
 
@@ -19,20 +20,71 @@ Page({
         songId:null
     },
 
+    // 专门用于请求歌曲的详细信息
+    async getMusicDetail(){
+
+        const result = await this.myAxios('/song/detail',{
+            ids:this.data.songId
+        })
+        this.setData({
+            songObj:result.songs[0]
+        })
+
+        wx.setNavigationBarTitle({
+            title:this.data.songObj.name
+        })
+    },
+
+    // 专门用于请求歌曲的音频链接
+    async getMusicUrl(){
+        const result2 = await this.myAxios('/song/url',{id:this.data.songId})
+        this.setData({
+            musicUrl:result2.data[0].url
+        })
+    },
+
+    // 用于监视用户点击下一首按钮操作
+    switchType(){
+        PubSub.subscribe('sendId',async (msg,songId)=>{
+            console.log('sendId',msg,songId)
+            this.setData({
+                songId
+            })
+
+            const detail=this.getMusicDetail();
+            const url=this.getMusicUrl();
+            await Promise.all([detail,url])
+            
+            this.backgroundAudioManager.src=this.data.musicUrl;
+            this.backgroundAudioManager.title=this.data.songObj.name;
+
+            this.setData({
+                isPlay:true
+            })
+
+            // 缓存当前歌曲播放状态
+            appInstance.globalData.playState=true;
+            // 缓存当前播放歌曲id
+            appInstance.globalData.audioId=this.data.songId;
+        })
+
+        PubSub.publish('switchType',"next");
+    },
+
     // 用于监视用户点击播放按钮,实现歌曲播放功能
     handlePlay(){
         // console.log('handlePlay1')
-        const backgroundAudioManager = wx.getBackgroundAudioManager();
+        // const backgroundAudioManager = wx.getBackgroundAudioManager();
         if(!this.data.isPlay){
-            backgroundAudioManager.src=this.data.musicUrl;
-            backgroundAudioManager.title=this.data.songObj.name;
+            this.backgroundAudioManager.src=this.data.musicUrl;
+            this.backgroundAudioManager.title=this.data.songObj.name;
 
             // 缓存当前歌曲播放状态
             appInstance.globalData.playState=true;
             // 缓存当前播放歌曲id
             appInstance.globalData.audioId=this.data.songId;
         }else{
-            backgroundAudioManager.pause();
+            this.backgroundAudioManager.pause();
 
             // 缓存当前歌曲播放状态
             appInstance.globalData.playState=false;
@@ -53,23 +105,15 @@ Page({
 
         const songId = options.songId;
 
-        // const song = JSON.parse(options.song)
-        const result = await this.myAxios('/song/detail',{
-            ids:songId
-        })
         this.setData({
-            songObj:result.songs[0],
             songId
         })
 
-        wx.setNavigationBarTitle({
-            title:this.data.songObj.name
-        })
+        this.backgroundAudioManager = wx.getBackgroundAudioManager();
+        // const song = JSON.parse(options.song)
+        this.getMusicDetail();
 
-        const result2 = await this.myAxios('/song/url',{id:songId})
-        this.setData({
-            musicUrl:result2.data[0].url
-        })
+        this.getMusicUrl();
         // console.log('result',result)
 
         // console.log('appInstance1',appInstance.a.msg)
@@ -77,11 +121,14 @@ Page({
         // console.log('appInstance2',appInstance.a.msg)
 
         const {playState,audioId} = appInstance.globalData;
-        if(playState&&audioId === this.data.songId){
+        // console.log('onLoad',playState,audioId,this.data.songId)
+        if(playState&&audioId === this.data.songId*1){
             this.setData({
                 isPlay:true
             })
         }
+
+        console.log('PubSub',PubSub)
     },
 
     /**
