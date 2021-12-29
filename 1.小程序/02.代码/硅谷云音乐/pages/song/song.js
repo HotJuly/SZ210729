@@ -1,4 +1,5 @@
 // pages/song/song.js
+const appInstance = getApp();
 Page({
 
     /**
@@ -12,7 +13,10 @@ Page({
         musicUrl:"",
 
         // 用于控制当前页面的C3效果
-        isPlay:false
+        isPlay:false,
+
+        // 用于存储当前页面歌曲id
+        songId:null
     },
 
     // 用于监视用户点击播放按钮,实现歌曲播放功能
@@ -23,8 +27,16 @@ Page({
             backgroundAudioManager.src=this.data.musicUrl;
             backgroundAudioManager.title=this.data.songObj.name;
 
+            // 缓存当前歌曲播放状态
+            appInstance.globalData.playState=true;
+            // 缓存当前播放歌曲id
+            appInstance.globalData.audioId=this.data.songId;
         }else{
             backgroundAudioManager.pause();
+
+            // 缓存当前歌曲播放状态
+            appInstance.globalData.playState=false;
+            // 能进入该判断,就说明歌曲已经正在播放了,所以不需要缓存当前播放歌曲id
         }
         
         this.setData({
@@ -46,7 +58,8 @@ Page({
             ids:songId
         })
         this.setData({
-            songObj:result.songs[0]
+            songObj:result.songs[0],
+            songId
         })
 
         wx.setNavigationBarTitle({
@@ -58,6 +71,17 @@ Page({
             musicUrl:result2.data[0].url
         })
         // console.log('result',result)
+
+        // console.log('appInstance1',appInstance.a.msg)
+        // appInstance.a.msg="我是修改之后的数据"
+        // console.log('appInstance2',appInstance.a.msg)
+
+        const {playState,audioId} = appInstance.globalData;
+        if(playState&&audioId === this.data.songId){
+            this.setData({
+                isPlay:true
+            })
+        }
     },
 
     /**

@@ -10,13 +10,18 @@ App({
 
         // console.log(config.onShow)
 
-        const onShow= config.onShow;
+        const onShow = config.onShow;
         config.onShow = function(){
           // if(!hasPermission())return;
           onShow.apply(this,arguments)
         }
         return PageFn(config)
       }
+    },
+    globalData:{
+      msg:"我是app的初始化全局数据",
+      playState:false,
+      audioId:null
     }
 })
 
