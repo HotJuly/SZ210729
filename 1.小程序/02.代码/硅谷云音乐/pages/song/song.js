@@ -45,37 +45,20 @@ Page({
 
     // 用于监视用户点击下一首按钮操作
     switchType(){
-        PubSub.subscribe('sendId',async (msg,songId)=>{
-            console.log('sendId',msg,songId)
-            this.setData({
-                songId
-            })
-
-            const detail=this.getMusicDetail();
-            const url=this.getMusicUrl();
-            await Promise.all([detail,url])
-            
-            this.backgroundAudioManager.src=this.data.musicUrl;
-            this.backgroundAudioManager.title=this.data.songObj.name;
-
-            this.setData({
-                isPlay:true
-            })
-
-            // 缓存当前歌曲播放状态
-            appInstance.globalData.playState=true;
-            // 缓存当前播放歌曲id
-            appInstance.globalData.audioId=this.data.songId;
-        })
 
         PubSub.publish('switchType',"next");
     },
 
     // 用于监视用户点击播放按钮,实现歌曲播放功能
-    handlePlay(){
+    async handlePlay(){
         // console.log('handlePlay1')
         // const backgroundAudioManager = wx.getBackgroundAudioManager();
+        
         if(!this.data.isPlay){
+
+            if(!this.data.musicUrl){
+                await this.getMusicUrl()
+            }
             this.backgroundAudioManager.src=this.data.musicUrl;
             this.backgroundAudioManager.title=this.data.songObj.name;
 
@@ -113,7 +96,7 @@ Page({
         // const song = JSON.parse(options.song)
         this.getMusicDetail();
 
-        this.getMusicUrl();
+        // this.getMusicUrl();
         // console.log('result',result)
 
         // console.log('appInstance1',appInstance.a.msg)
@@ -128,7 +111,30 @@ Page({
             })
         }
 
-        console.log('PubSub',PubSub)
+        // console.log('PubSub',PubSub)
+        
+        this.token= PubSub.subscribe('sendId',async (msg,songId)=>{
+            console.log('sendId',msg,songId)
+            this.setData({
+                songId
+            })
+
+            const detail=this.getMusicDetail();
+            const url=this.getMusicUrl();
+            await Promise.all([detail,url])
+            
+            this.backgroundAudioManager.src=this.data.musicUrl;
+            this.backgroundAudioManager.title=this.data.songObj.name;
+
+            this.setData({
+                isPlay:true
+            })
+
+            // 缓存当前歌曲播放状态
+            appInstance.globalData.playState=true;
+            // 缓存当前播放歌曲id
+            appInstance.globalData.audioId=this.data.songId;
+        })
     },
 
     /**
@@ -156,7 +162,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        PubSub.unsubscribe(this.token)
     },
 
     /**
