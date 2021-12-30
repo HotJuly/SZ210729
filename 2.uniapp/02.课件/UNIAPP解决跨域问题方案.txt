@@ -1,0 +1,11 @@
+1.使用内置浏览器
+	虽然该方法最方便,但是浏览器不是主流浏览器,所以不推荐使用
+	如果出现死循环,代码如果没保存,编辑器会未响应
+
+2.使用vue.config.js配置代理规则
+	该方法配置代理规则,需要参考的文档地址是vue-cli的官网地址,不是vue(!!!!)
+	地址:https://cli.vuejs.org/zh/config/#devserver-proxy
+
+3.使用manifest.json配置代理规则
+	使用manifest.josn->h5->devServer进行开发服务器配置
+	该配置参考webpack官网文档

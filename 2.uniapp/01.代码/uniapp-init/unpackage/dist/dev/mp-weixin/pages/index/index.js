@@ -221,6 +221,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 {
   data: function data() {
     return {
@@ -243,7 +247,7 @@ __webpack_require__.r(__webpack_exports__);
     // 建议API相关的还是使用uniapp自己的
     // console.log('mounted')
     uni.request({
-      url: "http://localhost:3002/getIndexData",
+      url: "/api/getIndexData",
       success: function success(res) {
         console.log('res', res);
         _this.indexData = res.data;

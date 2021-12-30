@@ -28,7 +28,11 @@
 			</view>
 			<button class="username" type="default">七月</button>
 		</view>
-		<scroll-view class="navScroll" scroll-x>
+		<scroll-view 
+		class="navScroll" 
+		scroll-x 
+		v-if="indexData.kingKongModule"
+		>
 			<view 
 			class="navItem" 
 			:class="{
@@ -79,7 +83,7 @@ export default {
 		// 建议API相关的还是使用uniapp自己的
 		// console.log('mounted')
 		uni.request({
-			url:"http://localhost:3002/getIndexData",
+			url:"/api/getIndexData",
 			success:(res)=>{
 				console.log('res',res)
 				this.indexData = res.data
