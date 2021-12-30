@@ -25,6 +25,11 @@
 .indexContainer .header .search .searchInput {
   height: 100%;
 }
+.indexContainer .header .search .searchInput .placeholder {
+  text-align: center;
+  font-size: 24rpx;
+  text-indent: -60rpx;
+}
 .indexContainer .header .search .iconfont {
   position: absolute;
   left: 20rpx;
@@ -40,5 +45,19 @@
   color: #f00;
   margin: 0 20rpx;
   flex-shrink: 0;
+}
+.indexContainer .navScroll {
+  white-space: nowrap;
+}
+.indexContainer .navScroll .navItem {
+  display: inline-block;
+  width: 140rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 26rpx;
+}
+.indexContainer .navScroll .navItem.active {
+  border-bottom: 4rpx solid #f00;
 }
 

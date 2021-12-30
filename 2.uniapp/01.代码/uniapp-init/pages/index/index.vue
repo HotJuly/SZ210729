@@ -24,10 +24,52 @@
 			<view class="search">
 				<view class="iconfont icon-sousuo">
 				</view>
-				<input class="searchInput" type="text" value="" />
+				<input class="searchInput" placeholder="搜索商品" placeholder-class="placeholder" type="text" value="" />
 			</view>
 			<button class="username" type="default">七月</button>
 		</view>
+		<scroll-view class="navScroll" scroll-x>
+			<view class="navItem active">
+				推荐
+			</view>
+			<view class="navItem">
+				居家生活
+			</view>
+			<view class="navItem">
+				服饰鞋包
+			</view>
+			<view class="navItem">
+				居家生活
+			</view>
+			<view class="navItem">
+				服饰鞋包
+			</view>
+			<view class="navItem">
+				居家生活
+			</view>
+			<view class="navItem">
+				服饰鞋包
+			</view>
+			<view class="navItem">
+				居家生活
+			</view>
+			<view class="navItem">
+				服饰鞋包
+			</view>
+			<view class="navItem">
+				居家生活
+			</view>
+			<view class="navItem">
+				服饰鞋包
+			</view>
+			<view class="navItem">
+				居家生活
+			</view>
+			<view class="navItem">
+				服饰鞋包
+			</view>
+		</scroll-view>
+		123
 	</view>
 </template>
 
@@ -35,7 +77,7 @@
 export default {
 	data() {
 		return {
-			title:'Hello1'
+			title:'Hello11'
 		}
 	},
 	onLoad() {},
@@ -70,6 +112,10 @@ export default {
 				padding-left 60upx
 				.searchInput
 					height 100%
+					.placeholder
+						text-align center
+						font-size 24upx
+						text-indent -60upx
 				.iconfont
 					position absolute
 					left 20upx
@@ -84,6 +130,18 @@ export default {
 				color  red
 				margin 0 20upx
 				flex-shrink  0
+		.navScroll
+			// display flex
+			white-space nowrap
+			.navItem
+				display inline-block
+				width 140upx
+				height 80upx
+				text-align center
+				line-height 80upx
+				font-size 26upx
+				&.active
+					border-bottom 4upx solid red;
 			
 		
 	
