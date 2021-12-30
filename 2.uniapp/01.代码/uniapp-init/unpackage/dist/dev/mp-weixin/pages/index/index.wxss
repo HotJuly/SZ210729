@@ -1,24 +1,44 @@
-
-.content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+.indexContainer .header {
+/*
+			使用padding替代margin 
+				1.不能有边框
+				2.不能有背景颜色
+		*/
+  padding-top: 20rpx;
+  display: flex;
+  align-items: center;
 }
-.logo {
-	height: 200rpx;
-	width: 200rpx;
-	margin-top: 200rpx;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 50rpx;
+.indexContainer .header .logo {
+  width: 118rpx;
+  height: 40rpx;
+  margin: 0 20rpx;
+  flex-shrink: 0;
 }
-.text-area {
-	display: flex;
-	justify-content: center;
+.indexContainer .header .search {
+  position: relative;
+  background-color: #ccc;
+  flex-grow: 1;
+  border-radius: 10rpx;
+  height: 60rpx;
+  padding-left: 60rpx;
 }
-.title {
-	font-size: 36rpx;
-	color: #8f8f94;
+.indexContainer .header .search .searchInput {
+  height: 100%;
+}
+.indexContainer .header .search .iconfont {
+  position: absolute;
+  left: 20rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.indexContainer .header .username {
+  width: 140rpx;
+  height: 60rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+  color: #f00;
+  margin: 0 20rpx;
+  flex-shrink: 0;
 }
 

@@ -1,0 +1,24 @@
+1.manifest.json
+	该文件是整个uniapp项目的脚手架配置文件,相当于小程序中的project.config.json
+	重要内容:可以在此处修改appID
+
+2.pages.json
+	该文件相当于小程序中的app.json+所有页面的json配置文件
+	必须拥有pages属性,用于声明注册当前项目所有页面
+	属性globalStyle相当于以前的window属性
+
+3.main.js+App.vue
+	该文件相当于小程序中的app.js+app.wxss
+	其中在注册小程序实例对象,同时还可以书写全局公共样式
+
+4.unpackage文件夹
+	该文件夹只有在编译成小程序运行时,才会出现
+	里面存放的就是真正编译完的小程序项目
+	禁止修改该文件,该文件夹中的修改都会被后续重新编译的代码覆盖
+
+5.pages文件夹
+	该文件夹中存储所有页面的代码
+	index.vue文件
+		template标签->wxml结构
+		script标签->js代码
+		style标签->wxss代码

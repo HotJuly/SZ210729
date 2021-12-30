@@ -4,11 +4,14 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": false
+    "urlCheck": false,
+    "es6": true,
+    "postcss": true,
+    "minified": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "touristappid",
+  "appid": "wxe5931a68ea66cece",
   "projectname": "uniapp-init",
   "condition": {
     "search": {
