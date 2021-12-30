@@ -29,59 +29,74 @@
 			<button class="username" type="default">七月</button>
 		</view>
 		<scroll-view class="navScroll" scroll-x>
-			<view class="navItem active">
+			<view 
+			class="navItem" 
+			:class="{
+				active:navIndex===-1
+			}"
+			@click="changeNavIndex(-1)"
+			>
 				推荐
 			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				服饰鞋包
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				服饰鞋包
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				服饰鞋包
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				服饰鞋包
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				服饰鞋包
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				服饰鞋包
+			<view 
+			class="navItem" 
+			:class="navIndex===index?'active':''"
+			@click="changeNavIndex(index)"
+			v-for="(kingKong,index) in indexData.kingKongModule.kingKongList"
+			:key="kingKong.L1Id"
+			>
+				{{kingKong.text}}
 			</view>
 		</scroll-view>
-		123
+		
+		<Recommend v-if="navIndex===-1"/>
+		<CateList v-else/>
 	</view>
 </template>
 
 <script>
+import Recommend from '../../components/Recommend/Recommend.vue'
+import CateList from '../../components/CateList/CateList.vue'
 export default {
 	data() {
 		return {
-			title:'Hello11'
+			title:'Hello11',
+			indexData:{},
+			navIndex:-1
 		}
 	},
-	onLoad() {},
-	methods:{}
+	components:{
+		Recommend,
+		CateList
+	},
+	/*
+		uniapp同时兼容小程序和Vue的生命周期,推荐使用Vue的生命周期
+	*/
+	mounted(){
+		// 小程序使用wx.request发送请求
+		// Vue使用axios发送请求
+		// uniapp兼容小程序的所有API
+		// 建议API相关的还是使用uniapp自己的
+		// console.log('mounted')
+		uni.request({
+			url:"http://localhost:3002/getIndexData",
+			success:(res)=>{
+				console.log('res',res)
+				this.indexData = res.data
+			}
+		})
+	},
+	// onLoad() {
+	// 	console.log('onLoad')
+	// },
+	// created(){
+	// 	console.log('created')
+	// },
+	methods:{
+		changeNavIndex(index){
+			this.navIndex = index;
+		}
+	}
 }
 </script>
 

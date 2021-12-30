@@ -101,6 +101,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    Recommend: function() {
+      return __webpack_require__.e(/*! import() | components/Recommend/Recommend */ "components/Recommend/Recommend").then(__webpack_require__.bind(null, /*! @/components/Recommend/Recommend.vue */ 20))
+    },
+    CateList: function() {
+      return __webpack_require__.e(/*! import() | components/CateList/CateList */ "components/CateList/CateList").then(__webpack_require__.bind(null, /*! @/components/CateList/CateList.vue */ 25))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -136,90 +162,105 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Recommend = function Recommend() {__webpack_require__.e(/*! require.ensure | components/Recommend/Recommend */ "components/Recommend/Recommend").then((function () {return resolve(__webpack_require__(/*! ../../components/Recommend/Recommend.vue */ 20));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CateList = function CateList() {__webpack_require__.e(/*! require.ensure | components/CateList/CateList */ "components/CateList/CateList").then((function () {return resolve(__webpack_require__(/*! ../../components/CateList/CateList.vue */ 25));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
-      title: 'Hello11' };
+      title: 'Hello11',
+      indexData: {},
+      navIndex: -1 };
 
   },
-  onLoad: function onLoad() {},
-  methods: {} };exports.default = _default;
+  components: {
+    Recommend: Recommend,
+    CateList: CateList },
+
+  /*
+                          	uniapp同时兼容小程序和Vue的生命周期,推荐使用Vue的生命周期
+                          */
+  mounted: function mounted() {var _this = this;
+    // 小程序使用wx.request发送请求
+    // Vue使用axios发送请求
+    // uniapp兼容小程序的所有API
+    // 建议API相关的还是使用uniapp自己的
+    // console.log('mounted')
+    uni.request({
+      url: "http://localhost:3002/getIndexData",
+      success: function success(res) {
+        console.log('res', res);
+        _this.indexData = res.data;
+      } });
+
+  },
+  // onLoad() {
+  // 	console.log('onLoad')
+  // },
+  // created(){
+  // 	console.log('created')
+  // },
+  methods: {
+    changeNavIndex: function changeNavIndex(index) {
+      this.navIndex = index;
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 18 */
