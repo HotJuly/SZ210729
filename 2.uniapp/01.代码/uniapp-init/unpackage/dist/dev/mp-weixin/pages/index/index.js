@@ -162,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Recommend = function Recommend() {__webpack_require__.e(/*! require.ensure | components/Recommend/Recommend */ "components/Recommend/Recommend").then((function () {return resolve(__webpack_require__(/*! ../../components/Recommend/Recommend.vue */ 20));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CateList = function CateList() {__webpack_require__.e(/*! require.ensure | components/CateList/CateList */ "components/CateList/CateList").then((function () {return resolve(__webpack_require__(/*! ../../components/CateList/CateList.vue */ 25));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 33));
 
 
 
@@ -223,6 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _myAxios = _interopRequireDefault(__webpack_require__(/*! ../../utils/myAxios.js */ 32));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Recommend = function Recommend() {__webpack_require__.e(/*! require.ensure | components/Recommend/Recommend */ "components/Recommend/Recommend").then((function () {return resolve(__webpack_require__(/*! ../../components/Recommend/Recommend.vue */ 20));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CateList = function CateList() {__webpack_require__.e(/*! require.ensure | components/CateList/CateList */ "components/CateList/CateList").then((function () {return resolve(__webpack_require__(/*! ../../components/CateList/CateList.vue */ 25));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -240,20 +241,22 @@ __webpack_require__.r(__webpack_exports__);
   /*
                           	uniapp同时兼容小程序和Vue的生命周期,推荐使用Vue的生命周期
                           */
-  mounted: function mounted() {var _this = this;
-    // 小程序使用wx.request发送请求
-    // Vue使用axios发送请求
-    // uniapp兼容小程序的所有API
-    // 建议API相关的还是使用uniapp自己的
-    // console.log('mounted')
-    uni.request({
-      url: "/api/getIndexData",
-      success: function success(res) {
-        console.log('res', res);
-        _this.indexData = res.data;
-      } });
+  mounted: function mounted() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
 
-  },
+
+
+
+
+                (0, _myAxios.default)("/getIndexData"));case 2:result = _context.sent;
+              _this.indexData = result;
+              // uni.request({
+              // 	url:"/api/getIndexData",
+              // 	success:(res)=>{
+              // 		console.log('res',res)
+              // 		this.indexData = res.data
+              // 	}
+              // })
+            case 4:case "end":return _context.stop();}}}, _callee);}))();},
   // onLoad() {
   // 	console.log('onLoad')
   // },
@@ -264,7 +267,6 @@ __webpack_require__.r(__webpack_exports__);
     changeNavIndex: function changeNavIndex(index) {
       this.navIndex = index;
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 18 */

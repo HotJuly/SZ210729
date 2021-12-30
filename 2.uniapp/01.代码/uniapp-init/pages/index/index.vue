@@ -59,6 +59,7 @@
 </template>
 
 <script>
+	import myAxios from '../../utils/myAxios.js'
 import Recommend from '../../components/Recommend/Recommend.vue'
 import CateList from '../../components/CateList/CateList.vue'
 export default {
@@ -76,19 +77,21 @@ export default {
 	/*
 		uniapp同时兼容小程序和Vue的生命周期,推荐使用Vue的生命周期
 	*/
-	mounted(){
+	async mounted(){
 		// 小程序使用wx.request发送请求
 		// Vue使用axios发送请求
 		// uniapp兼容小程序的所有API
 		// 建议API相关的还是使用uniapp自己的
 		// console.log('mounted')
-		uni.request({
-			url:"/api/getIndexData",
-			success:(res)=>{
-				console.log('res',res)
-				this.indexData = res.data
-			}
-		})
+		const  result = await myAxios("/getIndexData");
+		this.indexData = result
+		// uni.request({
+		// 	url:"/api/getIndexData",
+		// 	success:(res)=>{
+		// 		console.log('res',res)
+		// 		this.indexData = res.data
+		// 	}
+		// })
 	},
 	// onLoad() {
 	// 	console.log('onLoad')
