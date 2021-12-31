@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        :root{
+            --color:blue
+        }
+        .box{
+            width:200px;
+            height:200px;
+            border: 1px solid ;
+        }
+        .box1{
+            background-color: var(--color);
+        }
+        .box2{
+            color:  var(--color);
+        }
+    </style>
+</head>
+<body>
+    <div class="box box1">
+
+    </div>
+    <div class="box box2">
+        123
+    </div>
+    <button id="btn">变绿</button>
+    <script>
+        btn.onclick=function(){
+            // console.log('btn')
+            document.documentElement.style.setProperty("--color","green")
+        }
+    </script>
+</body>
+</html>

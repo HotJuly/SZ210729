@@ -48,8 +48,10 @@
 			</view>
 		</scroll-view>
 
-		<Recommend v-if="navIndex === -1" />
-		<CateList v-else />
+		<scroll-view class="contentScroll" scroll-y="true" >
+			<Recommend v-if="navIndex === -1" />
+			<CateList v-else />
+		</scroll-view>
 	</view>
 </template>
 
@@ -184,4 +186,15 @@ export default {
 			font-size 26upx
 			&.active
 				border-bottom 4upx solid red
+	.contentScroll
+	// /* #ifdef MP-WEIXIN */
+	// 	// 小程序:height=屏幕100%高度-header高度-nav高度
+	// 	height calc( 100vh - 80upx - 84upx)
+	// /* #endif */
+	// /* #ifdef H5 */
+	// 	// h5:height=屏幕100%高度-header高度-nav高度-导航栏高度-tabBar高度
+	// 	height calc( 100vh - 80upx - 84upx - 88upx - 100upx)
+	// /* #endif */
+	
+		height calc( 100vh - 80upx - 84upx - var(--window-top) - var(--window-bottom))
 </style>

@@ -4126,7 +4126,7 @@
 				"picUrl": "https://yanxuan.nosdn.127.net/5c088559ebcc3f0ffcda663f04dfbeb2.png",
 				"text": "运动旅行",
 				"textColor": "333333",
-				"L1Id":101010
+				"L1Id": 101010
 			},
 			{
 				"schemeUrl": "https://m.you.163.com/item/list?categoryId=1043000&style=pd",
@@ -4176,7 +4176,8 @@
 			"targetUrl": "https://m.you.163.com/pin/item/list"
 		}
 	],
-	"categoryModule": [{
+	"categoryModule": [
+		{
 			"manuItemIdList": [],
 			"titleSchemeUrl": "https://act.you.163.com/act/pub/U0tHHpHezVS3.html",
 			"autoItemIdList": [
