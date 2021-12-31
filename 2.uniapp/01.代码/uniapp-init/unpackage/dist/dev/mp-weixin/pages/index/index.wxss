@@ -1,6 +1,6 @@
 .indexContainer .header {
 /*
-			使用padding替代margin 
+			使用padding替代margin
 				1.不能有边框
 				2.不能有背景颜色
 		*/

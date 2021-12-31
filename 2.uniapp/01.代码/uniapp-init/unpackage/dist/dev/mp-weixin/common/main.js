@@ -8,6 +8,8 @@
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 5);var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 6));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./store/index.js */ 12));
+var _myAxios = _interopRequireDefault(__webpack_require__(/*! ./utils/myAxios.js */ 19));
 
 
 
@@ -18,23 +20,26 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));function _i
 
 _vue.default.config.productionTip = false;
 
+_vue.default.prototype.myAxios = _myAxios.default;
+
 // mp->mini program type->类型
 // 由于小程序中精准区分APP,PAGE,COMPONENT三者,
 // 但是Vue中只有Vue构造函数,所以在此处声明当前App组件代表整个小程序
 _App.default.mpType = 'app';
 
-var app = new _vue.default(_objectSpread({},
-_App.default));
-
-
-
-
-
-
-
-
-
-
+var app = new _vue.default(_objectSpread(_objectSpread({},
+_App.default), {}, {
+  store: _index.default
+  // onLaunch: function() {
+  // 	console.log('App Launch')
+  // },
+  // onShow: function() {
+  // 	console.log('App Show')
+  // },
+  // onHide: function() {
+  // 	console.log('App Hide')
+  // }
+}));
 createApp(app).$mount();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
