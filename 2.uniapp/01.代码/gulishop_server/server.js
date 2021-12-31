@@ -60,6 +60,39 @@ router.get("/getCategoryDatas",(ctx,next)=>{
 	ctx.body=categoryDatas
 })
 
+// 当前接口用于返回首页分类相关数据
+const indexCateList = require('./datas/indexCateList.json')
+router.get("/getIndexCateList",async (ctx,next)=>{
+	// console.log('/test success')
+	
+	// koa服务器无法使用定时器延迟数据的返回
+	// koa服务器如果路由回调函数返回一个promise对象,他就会等待当前promise对象的状态发生变化
+	// setTimeout(()=>{
+	// 	console.log(1)
+	// 	ctx.body=indexCateList
+	// },2000)
+	await new Promise((resolve)=>{
+		setTimeout(resolve,2000)
+	})
+	ctx.body=indexCateList
+})
+
+// 当前接口用于返回详情页相关数据
+const goods = require('./datas/goods.json')
+router.get("/getGoodDetail",(ctx,next)=>{
+	// console.log('/test success')
+	// 1.获取到前端传递的商品id
+	const id = ctx.query.id;
+	console.log('id',id)
+	
+	const result = goods.find((good)=>{
+		// >>>右移运算符 <<<左移运算符
+		return good.id === id>>>0;
+	})
+	ctx.body=result;
+	// console.log('result',result)
+})
+
 
 // 2.将服务器应用实例运行到某个指定端口上,并监听该端口
 app.listen("3002",(error)=>{
