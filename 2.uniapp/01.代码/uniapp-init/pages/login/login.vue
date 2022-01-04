@@ -26,7 +26,7 @@
 				uni.getUserProfile({
 					desc:"用于测试当前项目",
 					success:(res)=>{
-						// console.log('res',res)
+						console.log('res',res)
 						uni.setStorage({
 							key:"userInfo",
 							data:JSON.stringify(res.userInfo)
