@@ -9,7 +9,7 @@
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createApp) {__webpack_require__(/*! uni-pages */ 5);var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 6));
 var _index = _interopRequireDefault(__webpack_require__(/*! ./store/index.js */ 12));
-var _myAxios = _interopRequireDefault(__webpack_require__(/*! ./utils/myAxios.js */ 19));
+var _myAxios = _interopRequireDefault(__webpack_require__(/*! ./utils/myAxios.js */ 20));
 
 
 

@@ -30,12 +30,14 @@
 		<view class="detailFooter">
 			<image class="service" src="http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/detail-kefu-d10f0489d2.png?imageView&type=webp" mode=""></image>
 			<view class="btn buyNow">立即购买</view>
-			<view class="btn addShopCart">加入购物车</view>
+			<view class="btn addShopCart" @click="addToCart">加入购物车</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {ADDSHOPITEMCOUNTMUTATION} from '../../store/mutation-types.js'
+	import {mapMutations} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -47,6 +49,17 @@
 			const result = await this.myAxios('/getGoodDetail',{id:this.$mp.query.goodId})
 			// console.log('result',result)
 			this.goodInfo=result;
+		},
+		methods:{
+			addToCart(){
+				// console.log('addToCart')
+				// this.goodInfo.name="666"
+				uni.showToast({
+					title:"已添加购物车"
+				})
+				this[ADDSHOPITEMCOUNTMUTATION](this.goodInfo);
+			},
+			...mapMutations("cart",[ADDSHOPITEMCOUNTMUTATION])
 		}
 	}
 </script>
