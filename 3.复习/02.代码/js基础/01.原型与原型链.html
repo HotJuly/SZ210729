@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            如何区分普通函数和构造函数
+                约定俗成的规矩:首字母大写的函数就是构造函数
+                注意:
+                    1.一个函数只看函数声明是没办法分辨他到底是不是一个构造函数的
+                    2.只有被new调用的函数才是构造函数
+        */
+
+        /*
+            前言:万物皆对象,除了基础数据类型外
+
+            栈内存和堆内存
+            栈内存:可以存储函数名/变量名,基础数据类型
+            堆内存:可以存储对象类型数据
+
+            注意:栈内存可以存储基础数据类型,但是基础数据类型不一定只能存在栈内存中,也可以存储在堆内存的对象的属性中
+        */
+
+        /*
+            原型:
+                1.每个实例对象都有隐式原型属性(__proto__)
+                2.每个构造函数都有显式原型属性(prototype)
+                    每个函数都有显式原型属性(prototype),只是如果不是构造函数就会失去用处,所以不做探讨
+                3.每个实例对象的隐式原型都指向了构造函数的显式原型
+
+                注意:每个函数都会伴生一个原型对象
+        */
+        function Person(name){
+            this.name=name
+        }
+
+        var p1 = new Person("xiaoming");
+        // var p2 = Person();   ->打印window
+        // var p2 = Person;     ->打印函数体
+        // var p2 = Person();
+
+        console.log(p1)
+
+        function person(){}
+    </script>
+</body>
+</html>
