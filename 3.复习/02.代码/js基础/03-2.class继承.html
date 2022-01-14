@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            网上继承方案有十来种,但是最终面试只考两种继承
+                1.组合继承
+                2.class继承
+                    他其实是组合继承的语法糖,并不是一种全新的继承方案
+
+            说白了,最终js的继承都是通过原型链实现的
+        */
+
+        /* 
+            使用class设计并测试以下需要
+            需求1: 
+                现在2个人, 都有姓名与年龄(值自己指定), 都能自我介绍自己的姓名和年龄, 能得到当前的总人数
+            需求2: 
+                现在又有了一个学生, 它有身价的属性, 能介绍它的所有信息
+                又有一个老师, 它有教授课程的属性, 能介绍它的所有信息
+        */
+
+        /*
+            class注意点:
+                1.如果在class中写一个属性(如果没有使用ES6简写的方法),那么该属性会存在于每个实例对象身上
+                2.如果在class中使用ES6简写语法的方法,那么该方法会存在于原型对象身上
+                3.如果使用static关键字书写的属性,那么该属性就会存在构造函数(类)身上
+                4.super具有两种使用方法
+                    作为函数使用
+                        在子类的constructor中调用,相当于是在借调父类的构造函数,用于加工子类的实例对象
+                    作为对象使用
+                        在子类的constructor或者子类原型对象方法中使用,都相当于是子类的实例对象
+                        在子类的静态方法中使用,相当于是父类的函数对象
+
+            问题:方法和属性是什么关系?
+                其实方法是一个特殊的属性,特殊在属性值是函数类型
+        */
+
+        class Person{
+            constructor(name,age){
+                this.name=name;
+                this.age=age;
+                // this.sayHello=function(){
+                //     console.log(`我是${this.name},我今年${this.age}`);
+                // }
+
+                Person.count+=1;
+            }
+
+            static sayHello(){
+                console.log(`我是${this.name},我今年${this.age}`);
+            }
+            
+            // sayHello = function(){
+            //     console.log(`我是${this.name},我今年${this.age}`);
+            // }
+
+            static count = 0;
+        }
+
+        var p1 = new Person("小明",22);
+        var p2 = new Person("小红",18);
+        // p1.sayHello();
+        // p2.sayHello();
+        // console.log(p1,p2,Person.count)
+        // console.dir(Person)
+
+
+
+        // extends相当于组合继承中的1步骤,获取到父类的所有方法
+        class Student extends Person{
+            constructor(name,age,price){
+                // this.name = name;
+                // this.age = age;
+
+                // super相当于组合继承中的2步骤,获取到父类的所有属性
+                // Person.call(this,name,age)
+                super(name,age);
+                // super.sayHello();
+                this.price = price;
+            }
+
+            static sayHello2(){
+                super.sayHello();
+            }
+        }
+
+        var s1 = new Student('小王',17,100000000000);
+        // s1.sayHello2();
+        Student.sayHello2();
+        // console.log(s1)
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
