@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            构造函数只会在new调用的一瞬间,将自己的prototype传递给实例对象做为__proto__
+            后续事件,构造函数改变prototype的指向,不会影响到实例对象的__proto__属性
+
+            注意:当做原型链相关题目的时候,一定要注意
+                1.是否修改了构造函数的显式原型属性
+                2.是对原型对象属性的修改,还是替换了旧的原型对象换成全新的不同对象
+        
+        */
+        
+        function Person(name){
+            this.name=name
+        }
+
+        // Person.prototype.c = 3;
+
+        // Person.prototype={ 
+        //     c:3
+        // };
+
+        var p1 = new Person("xiaoming1");
+        
+        // 此修改方法,没有修改构造函数显式原型属性的地址值
+        // Person.prototype.c = 3;
+
+        // 此修改方法,有修改构造函数显式原型属性的地址值
+        Person.prototype={ 
+            c:3
+        };
+
+        console.log(p1,p1.c)
+    </script>
+</body>
+</html>

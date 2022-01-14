@@ -32,21 +32,75 @@
                 2.每个构造函数都有显式原型属性(prototype)
                     每个函数都有显式原型属性(prototype),只是如果不是构造函数就会失去用处,所以不做探讨
                 3.每个实例对象的隐式原型都指向了构造函数的显式原型
+                4.每个原型对象都具有constructor属性,用于指向对应的函数
 
                 注意:每个函数都会伴生一个原型对象
         */
+
+        /*
+            第44行到第49行是一个函数的声明代码,称之为执行函数定义
+            第52行是在调用该函数,称之为执行函数
+        */
         function Person(name){
             this.name=name
+            // this.eat=function(){
+            //     console.log('我正在吃东西')
+            // }
+
+            // 构造函数默认返回this对象
+            // return this;
+            // return {
+            //     name:"xixi"
+            // };
         }
 
-        var p1 = new Person("xiaoming");
+        Person.prototype.eat=function(){
+                console.log('我正在吃东西')
+        }
+
+        var p1 = new Person("xiaoming1");
+        var p2 = new Person("xiaoming2");
         // var p2 = Person();   ->打印window
         // var p2 = Person;     ->打印函数体
         // var p2 = Person();
 
-        console.log(p1)
+        // console.log(p1)
+        /*
+            当一个对象使用某个属性时,如果自身没有找到,就会顺着原型链向上查找,找构造函数的原型对象获取方法
+            p1.eat->p1.__proto__.eat->p1.__proto__.__proto__.eat
+        */
+        // p1.eat();
+        // p2.eat();
+        // console.log(p1.eat===p2.eat)
+        console.log(p1,p2)
 
-        function person(){}
+        // function person(){}
+        // function Dog(){
+
+        // }
+
+        // console.log(new Dog().eat)
+
+        /*
+            new做的事情
+                1.声明形参,接收传入的实参数据,并将数据赋值给形参
+                2.创建this变量(严格来说是个预留关键字),并向内注入一个对象
+                3.将构造函数 !!!当前!!! 的显式原型属性值赋值给实例对象作为隐式原型属性值
+                4.控制返回结果
+                    如果return的是基础数据类型,就会自动返回this对象
+                    如果return的是对象数据类型,就会返回该对象
+        
+        */
+
+        function Dog(name){
+            var that = new Object();
+            that.__proto__ = Dog.prototype;
+            that.name=name
+            return that;
+        }
+
+        var d1 = Dog("皮卡");
+        console.log('d1',d1)
     </script>
 </body>
 </html>
