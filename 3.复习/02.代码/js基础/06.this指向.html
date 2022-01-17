@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            作用域与函数声明位置有关
+            this指向与函数声明位置???没有任何关系(除了箭头函数)
+            this指向与函数调用方式有关
+            常见this指向:
+                一共是4种
+                1.普通调用  ->  a();
+                    此类方法,this指向为window
+                2.构造调用  ->  new a();
+                    此类方法,this指向为实例对象
+                3.隐式调用  ->  obj.fn();
+                    此类方法,this指向为该方法所属的对象(obj)
+                4.显式调用  ->  a.call(参数)    call/apply/bind
+                    此类方法可以强制指定函数的this指向,this指向为call函数的第一个实参
+
+            特殊的this指向:
+                1.事件回调函数  ->  box.onclick=function(){}
+                    此类方法,this指向为绑定事件监听的事件源对象(box)
+                2.定时器    ->  setTimeout(回调函数)
+                    此类方法->this指向为window
+                3.Vue组件
+                    此类方法中,methods,computed,watch,生命周期钩子函数,this指向都是当前组件实例对象
+                4.React组件
+                    如果是以a(){}写法声明回调函数,那么this指向是undefined
+                    如果是以a=()=>{}写法声明回调函数,那么this指向是组件实例对象
+                5.箭头函数
+                    箭头函数没有自己的this,他内部如果使用this,就会顺着作用域链向上查找(使用父级作用域的this)
+
+            面试题:请问call/apply/bind能否改变箭头函数的this指向?
+                    不能
+            
+            面试题:请问箭头函数能否构造调用?
+                    不能
+            
+            面试题:请问箭头函数是否具有原型对象?
+                    没有(他不可能具有实例对象,所以不需要原型对象)
+        */
+
+        // function a(){
+        //     console.log(this);
+        // }
+        // a();
+
+        // new a();
+
+        // var obj = {
+        //     fn:a
+        // }
+
+        // obj.fn();
+
+        // var a = ()=>{
+        //     console.log(this);
+        // }
+
+        // var obj2 ={
+        //     name:"xiaoming"
+        // }
+
+        // a.call(obj2)
+        // // new a();
+        // console.log(obj2)
+
+        /*
+            伪数组其实就是一个js对象,他的属性名是下标
+        */
+        // var length = 4;
+        // var obj = {
+        //     length:5,
+        //     fn:function(){
+        //         return this.length;
+        //     }
+        // };
+
+        // (function(length = 6){
+        //     var length = 7;
+        //     // console.log(arguments)
+        //     console.log(arguments[0]());
+        // })(obj.fn);
+
+        
+        // var length = 4;
+        // var obj = {
+        //     length:5,
+        //     fn:0x001
+        // };
+
+        // (function(length = 6){
+        //     var length = 7;
+        //     console.log(length)
+        //     // 对象读取属性的两种写法
+        //     // obj.fn obj["fn"]
+        //     // arguments是一个用于收集当前函数接收到的所有实参组成的伪数组
+        //     // arguments中会存储多少数据,与形参没有任何关系
+        //     // console.log(arguments[0]());
+        //     // console.log(arguments.0());
+        //     console.log([0x001][0]());
+        // })(0x001);
+
+
+        // var a = 1;
+        // var b = a;
+        // var obj ={
+        //     c:a
+        // }
+        // a=2;
+        // b=2;
+        // console.log(b,obj.c)
+
+        // function c(){
+        //     console.log(this)
+        // }
+        // var  arr = [c,1,2,3,4];
+        // // arr.0();
+        // arr[0]();
+
+
+        /*
+            需求:请手写实现一个call函数
+            面试题:请说明call和apply的区别
+                相同点:
+                    1.都可以修改被借调函数本次执行的this指向
+                    2.都会同步调用被借调函数
+                    3.都会将被借调函数的执行结果作为返回值进行返回
+                    4.如果传入的第一个参数不是对象数据类型,会做出对应效果
+                        -如果是undefined或者null
+                            本轮this就是window
+                        -如果是number,boolean,string类型的基础数据
+                            本轮this就是对应的包装类对象
+                不同点:
+                    1.传入实参的个数不相同
+                        call接收的实参数量  0->无限大
+                            会将第一个实参作为this指向使用
+                            会将第二个开始的实参作为参数传递给被借调函数
+
+                        apply接收的实参数量 0->2
+                            会将第一个实参作为this指向使用
+                            会将第二个实参作为参数传递给被借调函数
+                                第二个实参必须是数组(如果想要传递多个数据给被借调函数,就在该数组中书写)
+        */
+
+        var obj1={
+            name:"xiaowang"
+        }
+
+        // var obj2={
+        //     name:"xiaoming"
+        // }
+
+        function fn(a,b,c){
+            console.log(this,a,b,c)
+            return a+b+c;
+        }
+        // console.log(fn(1,2,3))
+        // var result1 = fn.call("1",1,2,3);
+        // var result2 = fn.apply("1",[1,2,3]);
+
+        // console.log(result1,result2)
+        
+
+        // 允许使用ES6语法
+        // Function.prototype.myCall=function(thatThis,...args){
+        //     /*
+        //         this->被借调函数fn
+        //         thatThis->开发者想要强行指定的this
+        //     */
+
+        //     var type = typeof thatThis;
+
+        //     if(thatThis===undefined||thatThis===null){
+        //         thatThis = window;
+        //     }else if(type==='number'){
+        //         thatThis = new Number(thatThis);
+        //     }else if(type==='string'){
+        //         thatThis = new String(thatThis);
+        //     }else if(type==='boolean'){
+        //         thatThis = new Boolean(thatThis);
+        //     }
+        //     // console.log(1,thatThis)
+
+        //     thatThis._fn = this;
+
+        //     var result = thatThis._fn(...args);
+
+        //     delete thatThis._fn;
+        //     return result;
+        // }
+
+        // 禁止使用ES6语法
+        Function.prototype.myCall=function(thatThis){
+            /*
+                this->被借调函数fn
+                thatThis->开发者想要强行指定的this
+            */
+
+            var args = [];
+            for(var i=1;i<arguments.length;i++){
+                args.push(arguments[i])
+            }
+
+            var type = typeof thatThis;
+
+            if(thatThis===undefined||thatThis===null){
+                thatThis = window;
+            }else if(type==='number'){
+                thatThis = new Number(thatThis);
+            }else if(type==='string'){
+                thatThis = new String(thatThis);
+            }else if(type==='boolean'){
+                thatThis = new Boolean(thatThis);
+            }
+            // console.log(1,thatThis)
+
+            thatThis._fn = this;
+
+            // var result = thatThis._fn(args.toString());
+
+            // eval(字符串格式的js代码) ->  他会将该字符串内的代码作为js直接调用
+            // var result = eval('thatThis._fn(1,2,3)');
+            var result = eval('thatThis._fn('+ args.toString()+ ')');
+
+            delete thatThis._fn;
+            return result;
+        }
+
+
+        var result1 = fn.myCall(obj1,1,2,3);
+        console.log(result1)
+    </script>
+</body>
+</html>
