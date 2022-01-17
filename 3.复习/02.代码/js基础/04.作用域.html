@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            在js中作用域只跟函数的!!!声明位置!!!有关,与调用位置无关
+
+            在编程界一共具有两大种作用域
+                1.词法作用域(静态作用域)
+                    该类作用域只与函数的声明位置有关
+                2.动态作用域
+                    该类作用域只与函数的调用位置有关
+
+            作用域面试考点:
+                1.js中一共具有几种作用域?   3种
+                    1.全局作用域(整个js代码的最外层)
+                    2.局部作用域(又称为函数作用域)
+                    3.块级作用域(ES6新增)
+                        块级作用域必须是在某个{}中使用let或者const才会存在
+                        被let或者const声明的变量只能在当前{}中访问
+
+                    注意:对象不存在自己独立的作用域
+
+                2.预解析(声明提升)
+                    1.一共有几种声明提升?   2种
+                        函数声明提升
+                            该类声明提升是整体提升,会将函数体以及函数声明都提前
+                        变量声明提升
+                            该类声明提升是局部提升,只会将变量声明提前
+
+                        注意:函数表达式的声明提升,属于变量声明提升,因为匿名函数不具备声明提升的条件
+                    2.声明提升的位置
+                        声明提升是将对应代码提升到当前作用域最顶端,不会出现穿透作用域的效果
+                    3.提升优先级
+                        函数提升优先于变量提升
+            
+
+            注意:其实函数名和变量在js中都称为"标识"
+        */
+
+        // var num = 1;
+
+        // function a(){
+        //     var num = 2;
+        //     function b(){
+        //         console.log(num)
+        //     }
+        //     return b;
+        // }
+
+        // var b = a();
+        // b();
+
+        // 题目一
+        // // 1.声明标识 2.声明函数体
+        // // var a = new Function("console.log('a')")
+        // function a(){
+        //     console.log('a')
+        // }
+
+        // var a;
+
+
+        // a();
+
+        // // 1.声明标识(变量) -> var a
+        // // 2.变量赋值 -> a=1;
+        // a = 1;
+
+        // 题目二
+        // function a(){
+        //     console.log(123)
+        // }
+
+        // var a = 2;
+        // a();
+
+        // 题目三
+        // // 函数表达式
+        // // var a = function(){
+        // //     console.log(234)
+        // // };
+
+        // // function a(){
+        // //     console.log(123)
+        // // }
+
+        // // a();
+
+        // // function a(){
+        // //     console.log(123)
+        // // }
+        // // var a;
+
+        // // a = function(){
+        // //     console.log(234)
+        // // };
+
+        // // a();
+
+        // 题目四
+        // // var num = 1;
+
+        // // function a(){
+        // //     var num = 2;
+        // //     var c = 3;
+            
+        // //     function b(){
+        // //         console.log(num)
+        // //         console.log(c)
+        // //     }
+
+        // //     b();
+        // // }
+
+        // // a();
+
+        // // console.log(num)
+        // // console.log(c)
+
+        
+        // 题目五
+        // // var num = 1;
+
+        // // // for(var i=0;i<1;i++){
+        // //     let obj = {
+        // //         num:2,
+        // //         fn:function (){ 
+        // //             num*=2;
+        // //             console.log(num)
+        // //         }
+        // //     }
+        // // // }
+
+        // // var num = 3;
+        // // obj.fn();
+
+    </script>
+</body>
+</html>

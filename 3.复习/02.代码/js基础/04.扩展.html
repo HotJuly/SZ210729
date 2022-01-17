@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 此题属于js漏洞,不能以常规的作用域进行理解
+        // 具名函数赋值是js所不允许的
+        /* 如果是具名函数的话
+            1.该函数名外部不可见,仅能在当前函数作用域中使用
+            2.而且该函数名的内容无法修改
+        */ 
+        // var a = 1;
+        // var obj = {
+        //     a:2,
+        //     fn:function a(){
+        //         a=3;
+        //         console.log(1,a)
+        //     }
+        // };
+        // // obj.fn = function a(){}
+        // obj.fn();
+        // console.log(2,a);
+
+        // var obj = function a(){
+        //     console.log('a',a)
+        // }
+        // // console.log(a)
+        // obj()
+
+        (function a(){
+            a=4;
+            console.log(1,a);
+        })();
+
+        console.log(2,a);
+    </script>
+</body>
+</html>
