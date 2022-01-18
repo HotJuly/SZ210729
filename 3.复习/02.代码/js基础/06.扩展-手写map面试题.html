@@ -22,21 +22,84 @@
         */
 
         // 数组是一个特殊的对象,特殊在key值是数字
-        var arr = [1,2,3];
-        var newArr = arr.map(function(item,index){
-            return item*3
-        });
-        console.log(newArr)
+        // var arr = [1,2,3];
+        // var newArr = arr.map(function(item,index){
+        //     return item*3
+        // });
+        // console.log(newArr)
 
-        // var obj={
-        //     name:"xiaoming",
-        //     age:"18",
-        //     sex:"男"
+        var obj={
+            name:"xiaoming",
+            age:"18",
+            sex:"男"
+        }
+
+        // 写法一:Object.keys + forEach
+        // Object.prototype.map = function(cb){
+        //     // this -> 原对象obj
+        //     /*
+        //         需求:根据当前对象拥有的属性名个数来多次执行cb函数
+        //     */
+
+        //     // 缓存map函数的this指向,方便forEach的回调函数中使用
+        //     var that = this;
+
+        //     // 用于收集全新的属性值,并且返回
+        //     var newObj = {};
+
+        //     // Object.values
+        //     // ["name","age","sex"]
+        //     // 生成当前对象的属性名组成的数组
+        //     var keys = Object.keys(obj);
+
+        //     keys.forEach(function(key){
+
+        //         newObj[key] = cb(that[key],key);
+
+        //     })
+
+        //     return newObj;
         // }
 
+        // 写法二: for...in + hasOwnProperty
+        // Object.prototype.map = function(cb){
+        //     // this -> 原对象obj
+        //     /*
+        //         需求:根据当前对象拥有的属性名个数来多次执行cb函数
+        //     */
+
+        //     // 用于收集全新的属性值,并且返回
+        //     var newObj = {};
+
+        //     for(var key in this){
+        //         // for...in不仅会遍历当前对象的所有属性名,还会遍历原型链上的属性(可枚举)
+
+        //         // 面试题:如何判断某个对象是否具有某个属性
+        //         // 通过hasOwnProperty可以过滤掉原型链上的属性
+        //         if(this.hasOwnProperty(key)){
+        //             newObj[key] = cb(this[key],key);
+        //         }
+        //     }
+
+        //     return newObj;
+        // }
+
+        // 写法三:使用JSON.parse的第二个实参具有类似于map的效果来实现
+        var newObj = JSON.parse(JSON.stringify(obj),function(key,value){
+            // console.log(a,b)
+            if (key) {
+                return value + "haha"
+            }else{
+                return value;
+            }
+        })
+
         // var newObj = obj.map(function(value,key){
-        //     return value+"1"
+        //     // console.log('cb',value,key)
+        //     return value+"haha"
         // })
+
+        console.log(newObj)
 
         // newObj = {
         //     name:"xiaoming1",
