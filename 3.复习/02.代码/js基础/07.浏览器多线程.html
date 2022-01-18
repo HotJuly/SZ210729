@@ -16,21 +16,43 @@
       aaaaaaa
   </div>
   <script>
-      Promise.resolve().then(() => { // ?任务
+      /*
+        页面挂载和页面渲染
+            挂载:将DOM节点添加到html中
+            渲染:将html中的内容绘制到页面上,给用户进行观看
+
+        解析js代码:需要js线程执行
+        渲染页面:需要GUI线程执行
+            注意:js线程与GUI线程互斥,不能同时执行
+
+        首次渲染流程:主线程代码执行结束->清空微任务队列->GUI线程渲染->执行宏任务
+        更新渲染流程:清空微任务队列->GUI线程渲染->执行宏任务
+      
+        浏览器的挂载操作是同步操作,渲染操作是异步操作
+      */
+    //  document.body.innerHTML=""
+      Promise.resolve().then(() => { // 微任务
           alert('promise1') // 页面渲染了吗?
       }) 
-      Promise.resolve().then(() => { // ?任务
+      Promise.resolve().then(() => { // 微任务
           alert('promise2') // 页面渲染了吗?
       }) 
-      setTimeout(() => {// ?任务
+      setTimeout(() => {// 宏任务
           alert(document.getElementById('content').innerHTML)  // 页面渲染了吗?
       }, 0)
-      document.getElementById('test').onclick = () => {// ?任务
-          document.getElementById('content').innerHTML = 'xxxx'
-          setTimeout(() => {// ?任务  
+      document.getElementById('test').onclick = () => {// 宏任务
+        // 注意:虽然DOM节点被修改了,但是页面不会立即渲染,会将渲染操作延迟
+          document.getElementById('content').innerHTML = 'xxxx' //由于我们修改了html中的dom节点,页面肯定会发生渲染
+        //   document.getElementById('content').innerHTML = 'xxxx1' //由于我们修改了html中的dom节点,页面肯定会发生渲染
+        //   document.getElementById('content').innerHTML = 'xxxx2' //由于我们修改了html中的dom节点,页面肯定会发生渲染
+        //   document.getElementById('content').innerHTML = 'xxxx3' //由于我们修改了html中的dom节点,页面肯定会发生渲染
+        //   document.getElementById('content').innerHTML = 'xxxx4' //由于我们修改了html中的dom节点,页面肯定会发生渲染
+        //   document.getElementById('content').innerHTML = 'xxxx5' //由于我们修改了html中的dom节点,页面肯定会发生渲染
+
+          setTimeout(() => {// 宏任务  
               alert(document.getElementById('content').innerHTML) // 页面更新渲染了吗?
           }, 0); 
-          Promise.resolve().then(() => { // ?任务 
+          Promise.resolve().then(() => { // 微任务 
               alert('promise3') //页面更新渲染了吗?
           }) 
       }
