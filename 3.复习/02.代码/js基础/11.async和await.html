@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            async和await
+                他们是generator的语法糖
+                他们是promise和then的语法糖
+
+            使用方法:
+                async关键字必须添加在函数声明之前
+                await关键字必须使用在async函数内部
+
+                await关键字右侧可以书写promise对象,如果该promise对象为成功状态,就会执行await之后的代码
+                    那么await表达式返回的结果就是promise的reuslt值
+
+                await关键字右侧可以书写非promise内容
+                    那么await表达式返回的结果就是右侧书写的非promise内容
+
+                await可以拦截后续代码的执行
+                
+                async可以单独使用,但是await必须跟着async才能使用
+
+            返回值:
+                async函数的返回值一定是一个promise对象(简称为p1)
+                    如何控制p1的状态变化
+                        变为成功
+                            1.async函数中所有的代码都能正常直接结束
+                                return undefined
+                            2.async函数中return一个成功的promise对象
+
+                        变为失败
+                            1.async函数中return一个失败的promise对象
+                            2.async函数执行过程中无法顺利执行结束(出现报错||await遇到失败的promise)
+
+                如果在async函数中出现return值,那么该return值最终会成为async函数返回的promise的result
+        */
+       
+        // async function a(){
+        //     // await new Promise(function(resolve){
+        //     //     console.log(1)
+        //     //     resolve(1)
+        //     // })
+
+        //     console.log(1)
+
+        //     await 123;
+
+        //     console.log(2)
+        // }
+
+        // a();
+        // console.log(3);
+
+        // async function a(){
+
+        //     var p1 = new Promise(function(resolve){
+        //         console.log(1)
+        //         resolve(1)
+        //     });
+
+        //     console.log(1,p1)
+
+        //     await p1
+
+        //     console.log(2)
+        // }
+
+        // a();
+        // console.log(3);
+
+        // 以上代码相当于以下写法
+        // function a(){
+
+        //     return new Promise(function(resolve){
+        //         console.log(1)
+        //         resolve(1)
+        //     })
+        //     .then(()=>{
+        //         console.log(2)
+        //     })
+        // }
+
+        // a();
+        // console.log(3);
+
+
+        // async function a(){
+        //     console.log(1)
+        // }
+        // a()
+        // console.log(2)
+
+
+        // async function a(){
+        //     // var result = await Promise.resolve(123);
+        //     var result = await 333;
+        //     console.log(result)
+        // };
+        // a();
+
+        
+        async function a(){
+            var result = await new Promise((resolve,reject)=>{
+                setTimeout(reject,1000)
+            });
+
+            console.log(1)
+        };
+        var p1 = a();
+        console.log(2,p1)
+
+
+        // function a(){
+        //     return new Promise((resolve)=>{
+        //         setTimeout(reject,1000)
+        //     })
+        //     .then(()=>{
+        //         console.log(1)
+        //     })
+        // }
+
+        // var p1 = a();
+        // console.log(2,p1)
+    </script>
+</body>
+</html>

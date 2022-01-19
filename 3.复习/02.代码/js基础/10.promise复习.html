@@ -31,11 +31,13 @@
                     注意:该执行器函数会被同步调用
 
             .then
-                .then可以监视前面的promise的状态变化,并执行对应的回调函数
+                .then会根据前面被监视的promise的状态执行对应的回调函数
                 接收参数(2个)
                     数据类型:函数
-                    第一个函数是当被监视的promise变为成功状态,才会执行
-                    第二个函数是当被监视的promise变为失败状态,才会执行
+                    第一个函数是当被监视的promise状态为成功状态,才会执行
+                    第二个函数是当被监视的promise状态为失败状态,才会执行
+                    
+                    在执行回调函数的同时,会将被监视的promise的result值作为实参传递给回调函数
 
                     注意:如果在执行对应回调函数的时候,没有可执行函数,那么当前.then返回的promise的状态会参考被监视的promise的状态
 
@@ -58,7 +60,7 @@
                 .catch可以监视前面promise的状态变化,如果该promise变为失败状态,就会执行回调函数
                 .catch其实是.then的语法糖
                 它相当于
-                    .then(undefined,()=>{})
+                    p1.then(undefined,()=>{})
         */
 
         // 例子一:promise的状态不可逆
@@ -81,7 +83,10 @@
 
 
         var p1 = new Promise(function (resolve, reject) {
-            setTimeout(reject, 1000);
+            setTimeout(reject, 1000, 345);
+            // setTimeout(()=>{
+            //     resolve(123);
+            // },1000)
         });
 
         //例子2:回调函数的返回值,不能够影响到.then的返回值,.then永远返回的都是promise 
@@ -135,15 +140,37 @@
         //     console.log('error')
         // })
         
-        p1
-        .then(function () {
-            console.log(1,'success1')
-        })
-        .then(function () {
-            console.log(3,'success1')
-        })
-        .catch(function(){
-            console.log(5,'error')
+        // 例子6:用于研究如果监视的promise发生变化,没有对应的回调函数会如何
+        // p1
+        // .then(function () {
+        //     console.log(1,'success1')
+        // })
+        // .then(function () {
+        //     console.log(3,'success1')
+        // })
+        // .catch(function(){
+        //     console.log(5,'error')
+        // })
+
+        // 例子7:用于研究.then是只能监视到promise变化的过程,还是只关心promise的状态是成功还是失败
+        // setTimeout(()=>{
+        //     // console.log(p1)
+        //     console.log(1,p1)
+        //     p1.then(function(){
+        //         console.log('2')
+        //     },function(){
+        //         console.log('3')
+        //     })
+        // },2000)
+
+        // setTimeout(function(){
+        //     console.log(p1)
+        // },1000)
+
+        p1.then(function(data){
+            console.log('2',data)
+        },function(error){
+            console.log('3',error)
         })
     </script>
 </body>
