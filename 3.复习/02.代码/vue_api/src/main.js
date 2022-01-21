@@ -36,6 +36,36 @@ Vue.config.productionTip = false
 Vue.config.errorHandler = function (err, vm, info) {
   console.log('errorHandler',err, vm, info)
 }
+
+// Vue.filter("myFilter",function(value){
+//   console.log("myFilter",value)
+//   return value+"1"
+// })
+
+/*
+  需求:当组件挂载结束之后,打印所有组件的name属性
+  解决:使用Vue.mixin实现对所有组件的生命周期进行加工
+  如果有一些操作,需要对所有的组件都实现,那么可以使用全局混入
+
+  注意:混合不会影响到原先的代码,如果组件同时存在全局混合的生命周期和自身的生命周期,会先执行全局混合的再执行自己的
+*/
+
+Vue.mixin({
+  mounted(){
+    console.log(this.$options.name)
+  }
+})
+
+// new Vue({
+//   render: h => h(App),
+// }).$mount('#app')
+
+
+var res = Vue.compile('<div><span>{{ msg }}</span></div>')
+
 new Vue({
-  render: h => h(App),
+  data: {
+    msg: 'hello'
+  },
+  render: res.render
 }).$mount('#app')

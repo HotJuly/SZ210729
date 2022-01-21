@@ -2,11 +2,13 @@
   <div id="app">
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <button v-if="isShow" @click="toEdit">添加</button>
-    <input ref="input666" v-else type="text" />
+    <!-- <input ref="input666" v-else type="text" /> -->
+    <div>{{obj.name}}</div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 // console.log('HelloWorld',HelloWorld)
 export default {
@@ -14,6 +16,9 @@ export default {
   data() {
     return {
       isShow: true,
+      obj:{
+        name:"xiaoming"
+      }
     };
   },
   components: {
@@ -35,16 +40,16 @@ export default {
       // })
       // console.log('this.isShow1',this.isShow)
       // 也就是说更新数据会使用到nextTick????
-      this.isShow = false;
+      // this.isShow = false;
       // console.log('this.isShow2',this.isShow)
       // debugger
 
       // 需求:当用户点击添加按钮时,自动切换展示input框,并自动获取焦点
-      this.$nextTick(()=>{
-        // console.log(this.$refs.input666)
-        // 在nextTick可以获取到当前最新的DOM更新结果
-        this.$refs.input666.focus();
-      })
+      // this.$nextTick(()=>{
+      //   // console.log(this.$refs.input666)
+      //   // 在nextTick可以获取到当前最新的DOM更新结果
+      //   this.$refs.input666.focus();
+      // })
 
 
 
@@ -73,6 +78,11 @@ export default {
       // });
 
       // console.log(6, "主线程代码");
+
+      console.log('delete之前',this.obj.name)
+      // delete this.obj.name
+      Vue.delete(this.obj,"name")
+      console.log('delete之后',this.obj)
     },
   },
   mounted() {
