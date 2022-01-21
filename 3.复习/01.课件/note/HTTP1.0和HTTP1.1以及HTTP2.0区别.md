@@ -20,17 +20,25 @@
 
 ​			HTTP 1.1支持长连接（PersistentConnection）和请求的流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟，在HTTP1.1中默认开启Connection： keep-alive
 
+​	注意:
+
+​		1.Chrome和Firefox最多可以存在6个长连接,但是长连接的数量服务器也可以控制
+
+​		2.浏览器可以跟每个服务器建立最多6个长连接(此处可以实现性能优化,如果请求资源过多,就可以将资源放在多个服务器上,提高加载速度)
+
+推荐文章:https://www.cnblogs.com/xianyulaodi/p/5755079.html
+
 
 
 ## HTTP和HTTPS的区别
 
 ​	1.HTTPS协议需要到CA申请证书，一般免费证书很少，需要交费
 
-​	2.HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的
+​	2.HTTP协议运行在TCP协议之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的
 
 ​	3.HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。
 
-​	4.HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。
+​	4.HTTPS可以有效的防止运营商劫持(DNS劫持)，解决了防劫持的一个大问题。
 
 
 
