@@ -50,11 +50,11 @@ Vue.config.errorHandler = function (err, vm, info) {
   注意:混合不会影响到原先的代码,如果组件同时存在全局混合的生命周期和自身的生命周期,会先执行全局混合的再执行自己的
 */
 
-// Vue.mixin({
-//   mounted(){
-//     console.log(this.$options.name)
-//   }
-// })
+Vue.mixin({
+  mounted(){
+    console.log(this.$options.name)
+  }
+})
 
 new Vue({
   render: h => h(App),
