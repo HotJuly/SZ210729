@@ -22,6 +22,23 @@
 		1.provide 和 inject 绑定并不是可响应的
 			也就是说修改provide的数据不会导致使用数据的后代组件发生变化
 			如果想要得到响应式的效果,可以自己使用Vue.observable去加工provide暴露出去的数据,将其变为响应式
-		
+
+3.自定义事件
+	v-model
+		v-model具有两种使用方法
+			对input标签使用
+				-将data中的某个响应式数据的值作为默认值在input框中进行展示
+    					<input type="text" :value="msg">
+				-当用户修改输入框的内容时,会同步修改data中对应的响应式属性的值
+					通过input事件监视用户对输入框内容的修改
+    					<input type="text" @input="event=>msg=event.target.value">
+			对组件标签使用
+				-将data中的某个响应式数据的值通过标签属性传递给子组件(标签属性名:value)
+    					<HelloWorld :value="msg" />
+				-给子组件绑定自定义事件input,开发者可以通过触发该事件来修改父组件对应的响应式属性(事件名:input)
+    					<HelloWorld @input="data=>msg=data" />
+			model配置项说明
+				prop属性用于自定义父组件传递下来的标签属性名称
+				event属性用于自定义父组件给子组件绑定的自定义事件名称
 	
 
