@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <!-- <HelloWorld v-model="msg" /> -->
-    <HelloWorld :value="msg" @input="data=>msg=data" />
+    <HelloWorld ref="hello123" :value="msg" a="1" b="2" c="3" @input="data=>msg=data" />
     <!-- <input type="text" v-model="msg"> -->
-    <input type="text" :value="msg" @input="event=>msg=event.target.value">
-    <h1>{{msg}}</h1>
+    <!-- <input type="text" :value="msg" @input="event=>msg=event.target.value"> -->
+    <h1 ref="h123">{{msg}}</h1>
   </div>
 </template>
 
@@ -20,6 +20,17 @@ export default {
   components: {
     HelloWorld,
   },
+  mounted(){
+    // console.log(this.$el)
+    // console.log(this.$children)
+    // console.log(this.$refs.hello123)
+    // this.$refs.hello123.testChild();
+  },
+  methods:{
+    testApi(){
+      console.log('testApi')
+    }
+  }
 };
 </script>
 

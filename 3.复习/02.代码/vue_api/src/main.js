@@ -1,7 +1,11 @@
 import Vue from 'vue'
+import ElementUI from 'element-ui'
 import App from './App.vue'
 
 Vue.config.productionTip = false
+
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 
 /*
   需求:将所有组件配置对象上的a属性的数值都+1
