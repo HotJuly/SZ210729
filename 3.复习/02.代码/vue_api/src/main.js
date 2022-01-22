@@ -71,6 +71,9 @@ Vue.config.errorHandler = function (err, vm, info) {
   注意:如果想使用template属性,必须在完整版本的Vue解析器下才能使用
 */
 
+// 创建一个Vue的实例对象放到Vue的原型对象上,使得所有的组件都能看到该实例对象
+Vue.prototype.$bus = new Vue();
+
 new Vue({
   // el:"#app",
   render: h => h(App),
