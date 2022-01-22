@@ -11,7 +11,13 @@
     >
     </el-image> -->
 
-    <h1>{{obj.age}}</h1>
+    <h1 v-pre>1:{{obj.age}}</h1>
+    <h1 v-once>2:{{obj.age}}</h1>
+    <h1>3:{{obj.age}}</h1>
+    <!-- <h1 v-else>{{obj.age}}</h1>
+
+    <h1 v-show="true">{{obj.age}}</h1>
+    <h1 v-show="false">{{obj.age}}</h1> -->
   </div>
 </template>
 
@@ -50,7 +56,7 @@ export default {
       // this.$destroy();
       // console.log(2)
 
-      // this.obj.age=19
+      this.obj.age=19
       // console.log(this.obj.age)
     },
     testChild() {
@@ -58,7 +64,7 @@ export default {
     },
   },
   mounted() {
-      this.$destroy();
+      // this.$destroy();
     // this.$parent相当于是父组件代码中的this
     // console.log(this.$parent.msg)
     // this.$parent.testApi();
