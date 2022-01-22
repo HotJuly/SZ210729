@@ -8,12 +8,16 @@
     <div>{{doubleNum}}</div>
     <div>{{doubleNum}}</div>
     <div>{{doubleNum}}</div> -->
-    <h1>{{obj.name}}</h1>
+    <!-- <h1>{{obj.name}}</h1>
+    <h1>{{isShow}}</h1>
+    <h1>{{c}}</h1> -->
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
+// import mixins from './mixins';
 // console.log('HelloWorld',HelloWorld)
 export default {
   name: "App",
@@ -45,6 +49,15 @@ export default {
   components: {
     HelloWorld,
   },
+  // provide:Vue.observable({
+  //   msg:"我是provide传递的数据",
+  // }),
+  provide:{
+    obj:Vue.observable({
+      msg:"我是provide传递的数据",
+    })
+  },
+  // mixins:[mixins],
   methods: {
     toEdit() {
       // console.log(this.obj)
@@ -76,6 +89,10 @@ export default {
     }
   },
   mounted() {
+    // console.log("APP",this._provided)
+    // this._provided.obj.msg="我是修改之后的数据";
+    // console.log("APP",this._provided.obj.msg)
+    this._provided.num = this.obj;
   },
   computed:{
     // 使用场景:如果你想使用一个数据,可是你手头没有,但是你可以通过data或者props计算得到,那么就是用computed

@@ -56,9 +56,26 @@ Vue.config.errorHandler = function (err, vm, info) {
 //   }
 // })
 
+/*
+  在Vue中,可以影响到页面显示内容的地方:
+    1.在根组件的配置对象中,添加template属性
+    2.在index.html中,可以书写Vue的模版代码
+    3.在根组件的配置对象中,添加render属性
+
+  渲染优先级:render>template>index.html
+
+  注意:如果想使用template属性,必须在完整版本的Vue解析器下才能使用
+*/
+
 new Vue({
+  // el:"#app",
   render: h => h(App),
-}).$mount('#app')
+  data: {
+    msg: 'hello',
+    msg1:"world"
+  },
+  template:"<h1>{{msg}}</h1>"
+}).$mount("#app")
 
 
 // var res = Vue.compile('<div><span>{{ msg }}</span></div>')

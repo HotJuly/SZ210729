@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <!-- <h1>{{ msg }}</h1> -->
-    <h1 @click="changeName">点我修改父组件的name属性</h1>
+    <h1>{{ obj.msg }}</h1>
+    <!-- <h1 @click="changeName">点我修改父组件的name属性</h1> -->
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
   props:{
     fn:Function
   },
+  inject:["obj"],
   a:3,
   mounted() {
     // try{
@@ -23,7 +24,7 @@ export default {
     // }catch(e){
     //   console.log(e)
     // }
-    console.log("mounted")
+    console.log("mounted",this.obj.msg)
   },
   methods:{
     changeName(){
