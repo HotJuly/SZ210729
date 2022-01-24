@@ -16,7 +16,7 @@
 </head>
   <body>
     <div id="app">
-      <p>{{msg}}</p>
+      <p class="a" v-on:click="handleClick">{{msg}}</p>
     </div>
     <script src="./js/observer.js"></script>
     <script src="./js/watcher.js"></script>
@@ -31,6 +31,11 @@
             name:"xiaoming",
             msg:"123"
           },
+        },
+        methods:{
+          handleClick(){
+            console.log('handleClick')
+          }
         }
       });
 

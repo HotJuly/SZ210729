@@ -67,7 +67,7 @@ function MVVM(options) {
     */
 
     /*
-        数据劫持
+        环节二:数据劫持
         劫持:绑架某个人,强迫这个做他不想做的事情,限制他的人生自由
 
         目的:
@@ -82,7 +82,7 @@ function MVVM(options) {
             3.创建ob实例对象,并调用ob的walk方法
             4.在walk方法中会对data对象所有的直系属性进行遍历操作,并调用defineReactive
             5.在defineReactive中
-                -会生成对应的dep对象
+                -会生成对应的dep对象(对首次渲染没有任何作用)
                 -会将当前准备进行数据劫持的属性的值传入observe方法中,如果value值是个对象就会继续进行深度遍历回到流程1
                 -重写data对象身上的当前属性,变成访问描述符(将原先的value属性替换成get/set方法)
                     如果有人读取该属性的值会返回当前属性的原属性值(此处通过闭包来实现对原属性值的保留)
@@ -95,8 +95,24 @@ function MVVM(options) {
     observe(data, this);
     // observe(this._data, vm);
 
-    
+    /*
+        环节三:模版解析
+        目的:将模版中的Vue指令或者插值语法进行解析,得到对应效果
+        流程(首次渲染):
+            1.通过el属性在页面上进行查找,找到对应的模版元素($el)
+            2.将$el元素中所有的直系子节点全部转移到文档碎片fragment中
+            3.调用init方法,开始编译模版
+            4.获取当前传入的元素进行判断
+                -如果是元素节点,就获取他的所有标签属性,用于识别vue指令(例如:v-on:,v-if等)
+                    如果元素节点中还具有子节点,开始深度递归,回到流程4
+                -如果是文本节点,就获取他的文本内容,并判断是否具有插值语法存在
+                    如果具有插值语法,就执行bind方法,对当前节点的文本内容进行替换,调换为data中对应的数据
+                        在执行bind时,会生成对应的watcher对象(对于首次渲染没有任何作用)
+            5.将解析完的文档碎片fragment插入到页面上,实现页面渲染(挂载)
+                
+    */
     this.$compile = new Compile(options.el || document.body, this)
+    // this.$compile = new Compile("#app" || document.body, vm)
 }
 
 MVVM.prototype = {
