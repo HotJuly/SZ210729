@@ -173,7 +173,7 @@ var compileUtil = {
 
     bind: function(node, vm, exp, dir) {
         // 小总结:模版中每具有一个插值表达式,就会执行一次bind函数
-        // this.bind(text节点, vm, "msg", );
+        // this.bind(text节点, vm, "msg", "text");
         var updaterFn = updater[dir + 'Updater'];
         // var updaterFn = updater['textUpdater'];
 
@@ -186,8 +186,13 @@ var compileUtil = {
             1.每次执行bind都会生成一个watcher对象
             2.模版中每具有一个插值表达式,就会生成一个对应的watcher对象
         */ 
-        // new Watcher(vm, exp, function(value, oldValue) {
-        //     updaterFn && updaterFn(node, value, oldValue);
+        new Watcher(vm, exp, function(value, oldValue) {
+            updaterFn && updaterFn(node, value, oldValue);
+        });
+
+        // new Watcher(vm, "msg", function(value, oldValue) {
+            // this->vm, "hello atguigu", "hello mvvm"
+        //     textUpdater && textUpdater(text节点, "hello atguigu", "hello mvvm");
         // });
         
     },
@@ -238,7 +243,11 @@ var updater = {
     textUpdater: function(node, value) {
         // text节点, "hello mvvm"
         // 这里使用了原生DOM操作,将对应的文本节点的插值语法替换成对应的data数据
+
+        // text节点, "hello atguigu", "hello mvvm"
+        debugger
         node.textContent = typeof value == 'undefined' ? '' : value;
+        debugger
     },
 
     htmlUpdater: function(node, value) {

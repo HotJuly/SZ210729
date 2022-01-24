@@ -1,8 +1,14 @@
-function Watcher(vm, exp, cb) {
+function Watcher(vm, exp, cb) {        
+    // new Watcher(vm, "msg", function(value, oldValue) {
+    //     textUpdater && textUpdater(node, value, oldValue);
+    // });
+
+    // this->watcher对象
     this.cb = cb;
     this.vm = vm;
     this.exp = exp;
     this.depIds = {};
+    // this.value存储着初始化的结果
     this.value = this.get();
 }
 
@@ -11,11 +17,14 @@ Watcher.prototype = {
         this.run();
     },
     run: function() {
+        // 用于获取当前表达式的最新结果->hello atguigu
         var value = this.get();
 
+        // 用于获取当前表达式的初始化数据->hello mvvm
         var oldVal = this.value;
         if (value !== oldVal) {
             this.value = value;
+            // this.cb.call(vm, "hello atguigu", "hello mvvm");
             this.cb.call(this.vm, value, oldVal);
         }
     },
@@ -35,14 +44,23 @@ Watcher.prototype = {
         // 触发了addDep(), 在整个forEach过程，当前wacher都会加入到每个父级过程属性的dep
         // 例如：当前watcher的是'child.child.name', 那么child, child.child, child.child.name这三个属性的dep都会加入当前watcher
         
+
+        // watcher.addDep(dep);
+        // 此处在添加watcher和dep的映射关系
         if (!this.depIds.hasOwnProperty(dep.id)) {
+
+            // 通过这一步,watcher收集到了与他相关的所有的dep对象
+            // watcher和插值表达式对应 dep和响应式属性对应
+            // 插值表达式找到了他是用的所有的响应式属性
             this.depIds[dep.id] = dep;
 
 
             dep.addSub(this);
+            // dep.addSub(watcher);
         }
     },
     get: function() {
+        // Dep.target = watcher;
         Dep.target = this;
 
         var value = this.getVMVal();
@@ -51,6 +69,7 @@ Watcher.prototype = {
     },
 
     getVMVal: function() {
+        // exp->["msg"]
         var exp = this.exp.split('.');
 
         var val = this.vm._data;
@@ -58,6 +77,11 @@ Watcher.prototype = {
         exp.forEach(function(k) {
             val = val[k];
         });
+
+        // exp.forEach(function(k) {
+            // 此处会触发数据劫持的get方法
+        //     val = vm._data["msg"];
+        // });
         return val;
     }
 };

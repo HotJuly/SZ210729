@@ -137,12 +137,17 @@ function Dep() {
 
 Dep.prototype = {
     addSub: function(sub) {
+        // dep.addSub(watcher);
         this.subs.push(sub);
+        // 此步操作实现了dep收集到所有与之相关的watcher
+        // 当前响应式属性收集到了使用到他的所有插值表达式
+        // dep.subs.push(watcher);
 
     },
 
     depend: function() {
         Dep.target.addDep(this);
+        // watcher.addDep(dep);
     },
 
     removeSub: function(sub) {

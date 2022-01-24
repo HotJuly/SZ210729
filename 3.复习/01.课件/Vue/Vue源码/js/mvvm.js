@@ -63,6 +63,35 @@ function MVVM(options) {
             2.页面会自动展示出最新数据
                 问题:如何在页面上展示最新数据?
                 解决:肯定会修改原生DOM显示的内容
+                    此处需要使用到dep和wacther之间的映射关系,来控制页面更新
+
+        准备工作:
+            1.每个插值表达式都会创建一个wacther对象
+            2.在创建watcher对象的时候,会实现对dep以及watcher两者之间的映射关系收集
+                -watcher的get方法中,将Dep.target赋值为当前watcher
+                -watcher获取当前最新的表达式结果的时候,会触发对应的响应式属性的get方法
+                -在get方法中,由于当前Dep.target中存着watcher对象,所以开始执行dep.depend方法
+                -在dep.depend方法中,会触发watcher的addDep方法,用于收集与当前watcher相关的所有dep对象
+                -同时触发dep的addSub方法,用于收集与当前dep相关的所有watcher对象
+
+        响应式流程:
+            1.当开发者执行vm.msg=123时,会触发Vue的数据代理的set方法
+            2.数据代理的set方法会触发数据劫持的set方法
+            3.数据劫持的set方法会触发dep.notify方法,通知视图进行更新
+            4.notify方法中,遍历dep的subs数组,并调用数组中所有的watcher对象的update方法
+            5.update方法中,调用watcher对象的cb回调函数
+            6.cb回调函数中调用对应节点的更新函数,实现节点更新
+
+        
+        Vue1.0更新页面的最小单位:标签
+        Vue2.0更新页面的最小单位:组件
+
+        Vue1.0每个插值语法都会具有一个对应的watcher对象
+        Vue2.0每个组件都会具有一个对应的watcher对象
+
+        从更新的精准度来说,感觉Vue1.0的更新更加精准,Vue2.0很可能产生误杀的情况
+        其实,Vue1.0的模式适合小型项目,Vue2.0的模式更适合中型项目
+        而且Vue2.0具有diff算法和虚拟DOM,二次提高了渲染的效率(解决了误杀的情况)
     
     */
 
