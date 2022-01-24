@@ -37,9 +37,9 @@ Vue.use(ElementUI);
       捕获到错误之后,通过ajax,将报错信息发送到公司对应服务器上,进行收集
 */
 
-// Vue.config.errorHandler = function (err, vm, info) {
-//   console.log('errorHandler',err, vm, info)
-// }
+Vue.config.errorHandler = function (err, vm, info) {
+  console.log('errorHandler',err, vm, info)
+}
 
 // Vue.filter("myFilter",function(value){
 //   console.log("myFilter",value)

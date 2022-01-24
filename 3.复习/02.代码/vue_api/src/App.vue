@@ -1,41 +1,42 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld v-model="msg" /> -->
-    <!-- <HelloWorld ref="hello123" :value="msg" a="1" b="2" c="3" @input="data=>msg=data" /> -->
-    <!-- <HelloWorld :value.sync="msg" /> -->
-    <HelloWorld :a123="msg" @update:a123 = "data=>msg=data"/>
-    <!-- <input type="text" v-model="msg"> -->
-    <!-- <input type="text" :value="msg" @input="event=>msg=event.target.value"> -->
+    <HelloWorld :a123="msg">
+      <template #default>
+        <A></A>
+      </template>
+      <template #B>
+        <B></B>
+      </template>
+      <!-- <template v-slot:B>
+        <B></B>
+      </template> -->
+      <!-- <template #C="prop123">
+        <h1>我是{{prop123.msg}}插槽</h1>
+      </template> -->
+      <template #C="{msg}">
+        <h1>我是{{msg}}插槽</h1>
+      </template>
+    </HelloWorld>
     <h1 ref="h123">{{msg}}</h1>
   </div>
 </template>
 
 <script>
+import A from './components/A.vue'
+import B from './components/B.vue'
 import HelloWorld from "./components/HelloWorld.vue";
 export default {
   name: "App",
   data() {
     return {
-      msg:"123"
+      msg:"hello"
     }
   },
   components: {
     HelloWorld,
+    A,
+    B
   },
-  mounted(){
-    // console.log(this.$el)
-    // console.log(this.$children)
-    // console.log(this.$refs.hello123)
-    // this.$refs.hello123.testChild();
-    this.$bus.$on('getMsg123',(data)=>{
-      console.log('getMsg123',data)
-    })
-  },
-  methods:{
-    testApi(){
-      console.log('testApi')
-    }
-  }
 };
 </script>
 
