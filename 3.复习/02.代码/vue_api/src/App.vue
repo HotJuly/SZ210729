@@ -1,41 +1,51 @@
 <template>
   <div id="app">
-    <HelloWorld :a123="msg">
-      <template #default>
-        <A></A>
-      </template>
-      <template #B>
-        <B></B>
-      </template>
-      <!-- <template v-slot:B>
-        <B></B>
-      </template> -->
-      <!-- <template #C="prop123">
-        <h1>我是{{prop123.msg}}插槽</h1>
-      </template> -->
-      <template #C="{msg}">
-        <h1>我是{{msg}}插槽</h1>
-      </template>
-    </HelloWorld>
-    <h1 ref="h123">{{msg}}</h1>
+    <ul>
+      <li v-for="item in arr" :key="item.name">
+        {{ item.name }}-{{ item.age }}
+      </li>
+    </ul>
+    <button @click="changeArr">修改</button>
   </div>
 </template>
 
 <script>
-import A from './components/A.vue'
-import B from './components/B.vue'
-import HelloWorld from "./components/HelloWorld.vue";
 export default {
   name: "App",
   data() {
     return {
-      msg:"hello"
-    }
+      arr: [
+        {
+          name: "小明1",
+          age: 23,
+        },
+        {
+          name: "小明2",
+          age: 24,
+        },
+        {
+          name: "小明3",
+          age: 25,
+        },
+      ],
+    };
   },
-  components: {
-    HelloWorld,
-    A,
-    B
+  methods: {
+    changeArr() {
+      // this.arr[1] = {
+      //   name: "小明4",
+      //   age: 44,
+      // };
+
+      // this.arr.splice(1,1,{
+      //   name: "小明4",
+      //   age: 44,
+      // })
+
+      // console.log(this.arr)
+
+      this.arr[0].name="小明666"
+    },
   },
 };
 </script>
