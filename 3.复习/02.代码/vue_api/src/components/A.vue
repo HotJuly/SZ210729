@@ -13,6 +13,7 @@ export default {
     };
   },
   mounted(){
+    // 绑定生命周期钩子函数
     console.log('A mounted');
   },
   destroyed() {

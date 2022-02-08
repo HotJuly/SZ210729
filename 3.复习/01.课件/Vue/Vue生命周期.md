@@ -5,6 +5,7 @@
    1. Vue前端渲染
       1. 初始化阶段
          1. beforeCreate
+            1. **beforeCreate之前,Vue正在初始化事件和生命周期**
          2. created
             1. 做的事情
                1. 发送请求
@@ -13,7 +14,19 @@
                2. 优点:更早发送请求,相对来说可以更早得到返回的响应数据,减少页面展示空白内容时间(更快展示有用数据)
                3. 缺点:在此阶段做事情,会阻塞后续代码执行,假设在此处阻塞10秒钟,页面也会延迟10秒进行解析展示
                4. 注意:此处不要做太多的逻辑密集类型操作
+            3. **beforeCreate之后created之前,Vue正在进行data,methods,computed等配置项的注入(数据代理)和数据劫持(响应式)**
          3. beforeMount
+            1. **created之后beforeMount之前,**
+               1. **检查是否具有el配置属性**
+                  1. **如果没有该属性,是否具有$mount方法调用**
+                  2. **如果都没有,那么组件将不会进行挂载(页面不会显示)**
+               2. **检查是否具有render方法**
+                  1. **如果具有render方法,直接结束**
+                  2. **如果不具有render方法,会检查是否具有template属性**
+                     1. **如果有template属性,会将template的结果编译成render方法**
+                     2. **如果没有template属性,会将el元素中的内容作为模版进行解析,变成render方法**
+               3. **总结:执行beforeMount的时候,一定具有render方法,但是不会调用render方法,所以不会生成虚拟DOM,render方法用于生成对应的虚拟DOM**
+               4. 实例对象身上的$vnode属性用于存储父组件的虚拟DOM,_vnode存储的是当前组件内部节点的虚拟DOM
          4. mounted
             1. 做的事情
                1. 发送请求
@@ -26,6 +39,7 @@
                1. 由于页面已经挂载结束,所以在此生命周期做的事情都不会阻塞页面的渲染
             3. 缺点:
                1. 由于更晚发送请求,相对来说得到数据的时间就会更晚,页面展示空白内容更久
+            4. **beforeMount之后mounted之前,Vue会调用render方法生成虚拟DOM,并通过虚拟DOM生成对应的真实DOM对象,最终替换掉index.html中的el元素**
       2. 更新阶段
          1. beforeUpdate
          2. updated

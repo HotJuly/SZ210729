@@ -15,7 +15,10 @@ function MVVM(options) {
         this->vm实例对象
     */
 
+
     this.$options = options;
+
+    /* 此处是beforeCreate生命周期的执行时机 */
 
     // 此处的this._data其实就是Vue2中的this.$data
     var data = this._data = this.$options.data;
@@ -145,6 +148,8 @@ function MVVM(options) {
     
     observe(data, this);
     // observe(this._data, vm);
+
+    /* 此处是created生命周期的执行时机 */
 
     /*
         环节三:模版解析

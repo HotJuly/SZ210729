@@ -7,6 +7,8 @@ function Compile(el, vm) {
     if (this.$el) {
         this.$fragment = this.node2Fragment(this.$el);
 
+        /* 此处是beforeMount生命周期的执行时机 */
+
         // 模版编译入口
         this.init();
 
@@ -16,6 +18,7 @@ function Compile(el, vm) {
         this.$el.appendChild(this.$fragment);
         // debugger
 
+        /* 此处是mounted生命周期的执行时机 */
     }
 }
 
