@@ -1,10 +1,11 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+// import VueRouter from 'vue-router';
+import MyRouter from '../my-router';
 
 import Home from '../components/Home.vue';
 import About from '../components/About.vue';
 
-Vue.use(VueRouter);
+Vue.use(MyRouter);
 
 /*
     面试题:什么是路由?
@@ -14,7 +15,7 @@ Vue.use(VueRouter);
         后端路由就是路由路径+请求方式与路由回调函数之间的映射关系
         router.get('/test',()=>{})
 */
-export default new VueRouter({
+export default new MyRouter({
     mode:"history",
     routes:[
         {

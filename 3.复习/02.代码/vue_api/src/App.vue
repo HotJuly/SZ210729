@@ -6,7 +6,10 @@
     <router-view></router-view>
     <router-link to="/home">toHome</router-link>
     <!-- <router-link to="/about">toAbout</router-link> -->
-    <div @click="clickHandler">
+    <!-- <div @click="clickHandler1">
+      toHome
+    </div> -->
+    <div @click="clickHandler2">
       toAbout
     </div>
     <!-- <a href="http://www.baidu.com">toBaidu</a> -->
@@ -19,7 +22,11 @@
 export default {
   name: "App",
   methods:{
-    clickHandler(){
+    clickHandler1(){
+      // console.log('clickHandler',this.$router,this.$route)
+      this.$router.push('/home')
+    },
+    clickHandler2(){
       // console.log('clickHandler',this.$router,this.$route)
       this.$router.push('/about')
     }
