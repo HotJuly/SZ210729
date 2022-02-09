@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <ul>
-      <li v-for="(item,index) in arr" :key="index">
-        <label>{{item}}</label>
-        <input type="text">
-      </li>
-    </ul>
-    <button @click="changeArr">修改</button>
+    App
+    <!-- <Home v-if="isShow"></Home>
+    <About v-else></About> -->
+    <router-view></router-view>
+    <router-link to="/home">toHome</router-link>
+    <!-- <router-link to="/about">toAbout</router-link> -->
+    <div @click="clickHandler">
+      toAbout
+    </div>
+    <!-- <a href="http://www.baidu.com">toBaidu</a> -->
   </div>
 </template>
 
 <script>
+// import Home from './components/Home.vue';
+// import About from './components/About.vue';
 export default {
   name: "App",
-  data() {
-    return {
-      arr: [1,2,3,4,5],
-    };
-  },
-  methods: {
-    changeArr() {
-      this.arr.splice(1,0,6);
-    },
-  },
+  methods:{
+    clickHandler(){
+      // console.log('clickHandler',this.$router,this.$route)
+      this.$router.push('/about')
+    }
+  }
 };
 </script>
 

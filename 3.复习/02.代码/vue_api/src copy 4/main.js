@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import router from './router';
 import App from './App.vue'
 
 Vue.config.productionTip = false
@@ -82,8 +81,7 @@ new Vue({
     msg: 'hello',
     msg1:"world"
   },
-  template:"<h1>{{msg}}</h1>",
-  router
+  template:"<h1>{{msg}}</h1>"
 }).$mount("#app")
 
 
