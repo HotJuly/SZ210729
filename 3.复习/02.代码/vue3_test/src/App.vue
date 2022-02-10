@@ -1,57 +1,41 @@
 <template>
   <div>
-    <!-- <h1>obj名字:{{obj.name}}</h1> -->
-    <!-- <h1>obj2名字:{{obj2.name}}</h1>
-    <h1>年龄:{{age}}</h1>
-    <button @click="clickHandler">修改</button> -->
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
-    <HelloWorld/>
+    <!-- <h1>姓名:{{obj2.name}}</h1>
+    <h1>年龄:{{obj2.age}}</h1> -->
+    <ul>
+      <li v-for="item in arr2" :key="item">{{item}}</li>
+    </ul>
+    <button @click="clickHandler">公开年龄</button>
   </div>
 </template>
 
 <script>
 import {ref,reactive} from 'vue';
-import HelloWorld from './components/HelloWorld';
 export default {
   name: 'App',
-  components:{
-    HelloWorld
-  }
-  // data(){
-  //   return {
-  //     obj2:{
-  //       name:"小王",
-  //     },
-  //     age:18
-  //   }
-  // },
-  // setup(){
-  //   const obj2={
-  //     name:"小绿"
-  //   }
-  //   return{
-  //     obj2
-  //   }
-  // },
-  // watch:{
-  //   obj2(){
-
-  //   },
-  //   a(){
-
-  //   },
-  //   b(){
-      
-  //   },
-  //   c(){
-      
-  //   }
-  // }
 }
+</script>
+
+<script setup>
+  const  obj = {
+    name:"小明"
+  }
+
+  const obj2 = reactive(obj)
+
+  const arr = [1,2,3,4];
+
+  const arr2 = reactive(arr);
+
+  const clickHandler = ()=>{
+    // 因为Vue2和Vue3的响应式原理不同,所以Vue3不需要$set和$delete方法
+    // obj2.age = 18;
+    // delete obj2.name
+
+    arr2[1]=7;
+
+    console.log(arr)
+  }
 </script>
 
 <style>
