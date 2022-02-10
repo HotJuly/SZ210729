@@ -4,6 +4,7 @@ import { resetRouter,asyncRoutes, anyRoutes, constantRoutes } from '@/router'
 import router from '@/router'
 
 import filterAsyncRoutes from '@/utils/filterAsyncRoutes';
+import mapButtons from '@/utils/mapButtons';
 
 const getDefaultState = () => {
   return {
@@ -45,19 +46,22 @@ const mutations = {
   // 专门用于设置用户帐号信息
   SET_PERMISSION(state,{roles,buttons,routes}){
     state.roles = roles;
-    state.buttons = buttons;
     state.routeNames = routes;
 
+    // 根据routeNames中出现的路由名称来过滤asyncRoutes中的路由对象
+    // 只有routeNames中出现的路由才能被留下来
     let newAsyncRoutes = filterAsyncRoutes(state.routeNames,asyncRoutes);
 
     // console.log('routes',routes1);
 
+    // 通过addRoutes实现异步路由的动态注入
     router.addRoutes([...newAsyncRoutes, ...anyRoutes]);
 
     state.routes = [...constantRoutes, ...newAsyncRoutes, ...anyRoutes]
 
-    // 根据routeNames中出现的路由名称来过滤asyncRoutes中的路由对象
-    // 只有routeNames中出现的路由才能被留下来
+    // 由于数组的查找性能较低,所以此处最好将buttons变为对象,方便查找
+    state.buttons = mapButtons(buttons);
+
 
   }
 }
