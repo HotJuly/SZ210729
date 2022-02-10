@@ -1,16 +1,56 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <!-- <h1>obj名字:{{obj.name}}</h1> -->
+    <!-- <h1>obj2名字:{{obj2.name}}</h1>
+    <h1>年龄:{{age}}</h1>
+    <button @click="clickHandler">修改</button> -->
+    <HelloWorld/>
+    <HelloWorld/>
+    <HelloWorld/>
+    <HelloWorld/>
+    <HelloWorld/>
+    <HelloWorld/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import {ref,reactive} from 'vue';
+import HelloWorld from './components/HelloWorld';
 export default {
   name: 'App',
-  components: {
+  components:{
     HelloWorld
   }
+  // data(){
+  //   return {
+  //     obj2:{
+  //       name:"小王",
+  //     },
+  //     age:18
+  //   }
+  // },
+  // setup(){
+  //   const obj2={
+  //     name:"小绿"
+  //   }
+  //   return{
+  //     obj2
+  //   }
+  // },
+  // watch:{
+  //   obj2(){
+
+  //   },
+  //   a(){
+
+  //   },
+  //   b(){
+      
+  //   },
+  //   c(){
+      
+  //   }
+  // }
 }
 </script>
 
