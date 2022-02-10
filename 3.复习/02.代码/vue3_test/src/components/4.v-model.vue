@@ -1,13 +1,12 @@
 <template>
   <div class="hello">
     <h2>HelloWorld</h2>
-  
     <button @click="clickHandler">+1</button>
   </div>
 </template>
 
 <script>
-import {useStore} from 'vuex'
+import {defineProps,defineEmits} from 'vue'
 export default {
   name: 'HelloWorld'
 }
@@ -15,9 +14,15 @@ export default {
 </script>
 
 <script setup>
-  const  store =useStore();
-  store.commit('CHANGEMSG','我是修改之后的store数据')
-  console.log(store.state.msg)
+  const props = defineProps(["msg"]);
+  // console.log(props)
+
+  const emits = defineEmits();
+
+  const clickHandler = ()=>{
+    // console.log('clickHandler')
+    emits("update:msg",124)
+  }
 </script>
 
 <style scoped>

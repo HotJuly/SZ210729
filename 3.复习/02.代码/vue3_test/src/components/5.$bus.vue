@@ -1,13 +1,12 @@
 <template>
   <div class="hello">
     <h2>HelloWorld</h2>
-  
     <button @click="clickHandler">+1</button>
   </div>
 </template>
 
 <script>
-import {useStore} from 'vuex'
+import $bus from '../myBus';
 export default {
   name: 'HelloWorld'
 }
@@ -15,9 +14,9 @@ export default {
 </script>
 
 <script setup>
-  const  store =useStore();
-  store.commit('CHANGEMSG','我是修改之后的store数据')
-  console.log(store.state.msg)
+  const clickHandler = ()=>{
+    $bus.emit('abc123',"haha")
+  }
 </script>
 
 <style scoped>
